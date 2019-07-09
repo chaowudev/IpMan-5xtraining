@@ -23,3 +23,8 @@ Things you may want to cover:
 
 * ...
 # IpMan-5xtraining
+
+- [Hand-painted prototype](./prototype/README.md)
+
+- IpMan ER-Model:
+![IpMan ER-Model](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/19.07.08_ipman_ERD.jpg)
