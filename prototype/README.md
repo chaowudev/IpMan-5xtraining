@@ -1,3 +1,6 @@
+![ipman-prototype-1](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/prototype-1.JPG)
+![ipman-prototype-2](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/prototype-2.JPG)
+
 # IpMan Prototype (simple version)
 
 ## User
