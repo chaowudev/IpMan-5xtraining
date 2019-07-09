@@ -1,6 +1,6 @@
-#IpMan Prototype (simple version)
+# IpMan Prototype (simple version)
 
-##User
+## User
 
 - C: 在 `User` 的 `sign-up-page`
   - 所需資訊：
@@ -27,7 +27,7 @@
 
 - D: 在 `admin` 的 `management-page` 可以進行刪除 users 的動作
 
-##Task
+## Task
 
 - C: 在 `Task` 的 `new-page`
   - 所需資訊：
@@ -51,7 +51,7 @@
 
 - D: 在 `Task` 的 `index-page` 可以進行刪除 tasks 的動作
 
-##Tag
+## Tag
 
 - C: 在 `Task` 的 `new-page` & `edit-page`
   - 所需資訊：
