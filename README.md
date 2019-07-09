@@ -23,3 +23,5 @@ Things you may want to cover:
 
 * ...
 # IpMan-5xtraining
+
+- [Hand-painted prototype](./prototype/README.md)
