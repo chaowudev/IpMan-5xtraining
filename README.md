@@ -26,4 +26,5 @@ Things you may want to cover:
 
 - [Hand-painted prototype](./prototype/README.md)
 
-- ![IpMan ER-Model](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/19.07.08_ipman_ERD.jpg)
+- IpMan ER-Model:
+![IpMan ER-Model](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/19.07.08_ipman_ERD.jpg)
