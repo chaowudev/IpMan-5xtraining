@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2019_07_09_075401) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "tag_tasks", force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "task_id"
+    t.bigint "tag_id"
+    t.bigint "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tag_id"], name: "index_tag_tasks_on_tag_id"
@@ -28,7 +31,7 @@ ActiveRecord::Schema.define(version: 2019_07_09_075401) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "title"
     t.text "description"
     t.integer "status", default: 0
@@ -48,4 +51,7 @@ ActiveRecord::Schema.define(version: 2019_07_09_075401) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "tag_tasks", "tags"
+  add_foreign_key "tag_tasks", "tasks"
+  add_foreign_key "tasks", "users"
 end
