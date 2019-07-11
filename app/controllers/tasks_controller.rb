@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :options_content, only: :new
+  before_action :options_content, only: %i[new create]
 
   def index
     @tasks = Task.all  # 之後做分頁功能時要再做修正，不要使用 .all
