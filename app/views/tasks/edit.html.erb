@@ -1,0 +1,7 @@
+<h1>Edit Task</h1>
+
+<%= link_to 'Index', tasks_path %>
+<%= link_to 'Show', task_path %>
+
+<!-- partial render -->
+<%= render 'form', task: @task, action: :update, method: :patch %>

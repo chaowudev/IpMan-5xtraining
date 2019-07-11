@@ -9,4 +9,7 @@
     <li><p>Status: <%= task.status %> (<%= task.emergency_level %>)</p></li>
     <li><p>Deadline: <%= task.deadline_at %></p></li>
   </ul>
+  <%= link_to 'Show', task_path(task) %>
+  <%= link_to 'Edit', edit_task_path(task) %>
+  <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>

@@ -1,0 +1,12 @@
+<h1>Task Details</h1>
+
+<%= link_to 'Index', tasks_path %>
+<%= link_to 'Edit', edit_task_path(@task) %>
+<%= link_to 'Delete', task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<ul>
+  <li><p>Title: <%= @task.title %></p></li>
+  <li><p><%= @task.started_at %> ~ <%= @task.deadline_at %></p></li>
+  <li><p>Status: <%= @task.status %> (<%= @task.emergency_level %>)</p></li>
+  <li><p>Description: <%= @task.description %></p></li>
+</ul>
