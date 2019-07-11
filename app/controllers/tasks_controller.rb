@@ -15,7 +15,9 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path, notice: 'Create Success'
     else
-      render :new, notice: 'Create failure'
+      # 待處理：如果不是重新整理的話，直接點選連結到下一頁，notice 還會再頁面上...
+      flash[:notice] = 'Create failure, please fill in all columns'
+      render :new
     end
   end
   
