@@ -45,8 +45,8 @@ class TasksController < ApplicationController
   private
   
   def options_content
-    @status = Task.statuses.keys.to_a
-    @emergency_level = Task.emergency_levels.keys.to_a
+    @statuses = Task.statuses.keys
+    @emergency_levels = Task.emergency_levels.keys
   end
   
   def task_permit_params
