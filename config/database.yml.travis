@@ -8,7 +8,7 @@ development:
   database: ipman-5xtraining/development
 
 test:
-  adapter: postgresql
+  <<: *default
   database: travis_ci_test
 
 production:
