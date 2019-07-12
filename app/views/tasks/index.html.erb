@@ -1,0 +1,15 @@
+<h1>Task Index</h1>
+
+<%= link_to 'New Task', new_task_path %>
+
+<% @tasks.each.with_index do |task, index| %>
+  <ul>
+    <li><p>(<%= index + 1 %>) Title: <%= task.title %></p></li>
+    <!-- 之後 nav-bar 有狀態頁籤後記得把 status 拿掉 -->
+    <li><p>Status: <%= task.status %> (<%= task.emergency_level %>)</p></li>
+    <li><p>Deadline: <%= task.deadline_at %></p></li>
+  </ul>
+  <%= link_to 'Show', task_path(task) %>
+  <%= link_to 'Edit', edit_task_path(task) %>
+  <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
