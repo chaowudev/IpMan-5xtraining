@@ -13,7 +13,6 @@ env:
   - DB=postgres
   global:
   - PGPORT=5433
-YAML
 before_script:
   - cp config/database.yml.travis config/database.yml
 script:
