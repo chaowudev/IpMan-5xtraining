@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
+  before_action :search, only: :index
 
   def index
-    @tasks = Task.all.order(:created_at)  # 之後做分頁功能時要再做修正，不要使用 .all
   end
 
   def new
@@ -43,6 +43,16 @@ class TasksController < ApplicationController
   end
   
   private
+
+  def search
+    if params[:search]
+      @search_params = params[:search].downcase
+      # 模糊比對且不論大小寫都能夠搜尋到
+      @tasks = Task.where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{@search_params}%", "%#{@search_params}%")
+    else
+      @tasks = Task.all.order(:created_at)  # 之後做分頁功能時要再做修正，不要使用 .all
+    end
+  end
   
   def options_content
     @statuses = Task.statuses.keys
