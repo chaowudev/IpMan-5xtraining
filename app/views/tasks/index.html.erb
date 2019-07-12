@@ -4,7 +4,7 @@
 
 <%= form_tag tasks_path, method: :get do %>
   <%= text_field_tag :search, params[:search], placeholder: 'Enter search text' %>
-  <%= submit_tag 'Search', name: nil %>  # 避免 url 有 commit=Search 不必要的資訊
+  <%= submit_tag 'Search', name: nil %>
 <% end %>
 
 <% @tasks.each.with_index do |task, index| %>
