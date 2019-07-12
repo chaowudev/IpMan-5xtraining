@@ -3,6 +3,14 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
+development:
+  <<: *default
+  database: ipman-5xtraining/development
+
 test:
   <<: *default
   database: travis_ci_test
+
+production:
+  <<: *default
+  database: ipman-5xtraining/production
