@@ -3,16 +3,8 @@ rvm:
   - 2.6.0
 services:
   - postgresql
-addons:
-  postgresql: "11.3"
-  apt:
-    packages:
-    - postgresql-11.3
-    - postgresql-client-11.3
 env:
   - DB=postgres
-  global:
-  - PGPORT=5433
 before_script:
   - cp config/database.yml.travis config/database.yml
 script:
