@@ -8,4 +8,7 @@ class Task < ApplicationRecord
 
   validates :user_id, :title, :description, :status, :started_at, :deadline_at, :emergency_level, presence: true
 
+  # 邏輯
+  scope :search_title_and_description, -> (search_params) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%") }
+
 end

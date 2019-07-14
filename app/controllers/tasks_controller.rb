@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
+  before_action :search, only: :index
 
   def index
-    @tasks = Task.all.order(:created_at)  # 之後做分頁功能時要再做修正，不要使用 .all
   end
 
   def new
@@ -43,6 +43,15 @@ class TasksController < ApplicationController
   end
   
   private
+
+  def search
+    if params[:search]
+      @search_params = params[:search].downcase
+      @tasks = Task.search_title_and_description(@search_params)
+    else
+      @tasks = Task.order(:created_at)
+    end
+  end
   
   def options_content
     @statuses = Task.statuses.keys
