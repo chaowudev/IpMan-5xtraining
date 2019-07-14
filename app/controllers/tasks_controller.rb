@@ -47,10 +47,9 @@ class TasksController < ApplicationController
   def search
     if params[:search]
       @search_params = params[:search].downcase
-      # 模糊比對且不論大小寫都能夠搜尋到
-      @tasks = Task.where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{@search_params}%", "%#{@search_params}%")
+      @tasks = Task.search_title_and_description(@search_params)
     else
-      @tasks = Task.all.order(:created_at)  # 之後做分頁功能時要再做修正，不要使用 .all
+      @tasks = Task.order(:created_at)
     end
   end
   
