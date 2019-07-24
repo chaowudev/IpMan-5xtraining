@@ -16,12 +16,12 @@
     <%= f.select :emergency_level, options_for_select(@emergency_levels) %>
   </div>
 
-  <div>
+  <div class="date-of-started-time-container">
     <%= f.label :started_at, 'Started_at:' %>
     <%= f.date_select :started_at, order: %i[year month day] %>
   </div>
 
-  <div>
+  <div class="date-of-deadline-time-container">
     <%= f.label :deadline_at, 'Deadline_at:' %>
     <%= f.date_select :deadline_at, order: %i[year month day] %>
   </div>
@@ -33,7 +33,7 @@
   </div>
 
   <div id="form-action">
-    <%= f.submit 'Update' %>
+    <%= f.submit button %>
   </div>
 
 <% end %>

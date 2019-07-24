@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   has_many :tags, through: :tag_tasks
 
   enum status: %i[to_do doing done achive]
-  enum emergency_level: %i[unimportatn important urgent]
+  enum emergency_level: %i[unimportant important urgent]
 
   validates :user_id, :title, :description, :status, :started_at, :deadline_at, :emergency_level, presence: true
 
