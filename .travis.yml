@@ -1,4 +1,6 @@
 language: ruby
+addons:
+  chrome: stable
 cache: bundler
 rvm:
   - 2.6.0
