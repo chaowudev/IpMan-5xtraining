@@ -6,6 +6,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/rails'
+require 'support/factory_bot'
 
 # run test automatically by Chrome
 Capybara.default_driver = :selenium_chrome

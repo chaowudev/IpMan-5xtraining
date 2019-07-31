@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "TaskManagements", type: :feature do
   # User need to sign in before task management
-  let(:user) { User.create(email: 'ipman@test.com', password: '123123', role: 'user') }  # let 是懶惰方法
+  let(:user) { create :user }  # let 是懶惰方法
   before { user }
   
   feature 'create task flow' do
@@ -34,7 +34,7 @@ RSpec.feature "TaskManagements", type: :feature do
   end
   
   feature 'existence task flow' do
-    let(:task) { Task.create(user_id: user.id, title: 'task test', description: 'this is task test', status: 0, started_at: '2019-07-11', deadline_at: '2019-07-12', emergency_level: 0) }
+    let(:task) { create :task, user_id: user.id }
     before { task }
 
     scenario 'User reads task' do
