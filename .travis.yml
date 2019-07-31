@@ -10,6 +10,9 @@ env:
   - DB=postgres
 before_script:
   - cp config/database.yml.travis config/database.yml
+  - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.12/bin/
+  - export CHROME_BIN=chromium-browser
 script:
   - bundle exec rails db:setup RAILS_ENV=test
   - bundle exec rspec
