@@ -9,7 +9,16 @@ require 'capybara/rails'
 require 'support/factory_bot'
 
 # run test automatically by Chrome
-Capybara.default_driver = :selenium_chrome
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.javascript_driver = :chrome
+
+Capybara.configure do |config|
+  config.default_max_wait_time = 10 # seconds
+  config.default_driver        = :selenium_chrome
+end
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
