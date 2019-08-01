@@ -8,16 +8,6 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'support/factory_bot'
 
-# run test automatically by Chrome
-Capybara.register_driver :chrome do |app|
-	options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
-
-	Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
-end
-
-Capybara.default_driver = :selenium_chrome
-# Capybara.javascript_driver = :chrome
-
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -45,6 +35,26 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.include Capybara::DSL
+
+  Capybara.register_driver :headless_chrome do |app|
+    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w(no-sandbox headless disable-gpu) }
+    )
+    client = Selenium::WebDriver::Remote::Http::Default.new
+    client.read_timeout = 120
+    profile = Selenium::WebDriver::Chrome::Profile.new
+    profile['intl.accept_languages'] = 'en'
+    Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities, http_client: client, profile: profile)
+  end
+  
+  Capybara.configure do |config|
+    config.default_driver = :headless_chrome
+    config.javascript_driver = :headless_chrome
+    config.default_max_wait_time = 10 # seconds
+    config.default_host = "http://localhost" # localhost
+    config.server_port = 5566
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
