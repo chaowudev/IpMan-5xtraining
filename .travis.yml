@@ -2,16 +2,16 @@ language: ruby
 cache: bundler
 rvm:
   - 2.6.0
+services:
+  - postgresql
+env:
+  - DB=postgres
 dist: trusty
 addons:
   chrome: stable
 before_install:
   - # start your web application and listen on `localhost`
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-services:
-  - postgresql
-env:
-  - DB=postgres
 before_script:
   - cp config/database.yml.travis config/database.yml
 script:
