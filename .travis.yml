@@ -7,12 +7,6 @@ chrome: &chrome
       apt:
         packages:
           - google-chrome-stable
-matrix:
-  include:
-    - env: CHROME=1 TASK=//rb:chrome-test
-      <<: *ruby
-      <<: *chrome
-install: ./scripts/travis/install.sh
 env:
   - DB=postgres
 before_script:
