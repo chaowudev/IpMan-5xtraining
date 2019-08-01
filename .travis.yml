@@ -4,6 +4,8 @@ rvm:
   - 2.6.0
 addons:
   chrome: stable
+sudo: required
+dist: trusty
 services:
   - postgresql
 env:
