@@ -7,6 +7,8 @@ chrome: &chrome
       apt:
         packages:
           - google-chrome-stable
+services:
+  - postgresql
 env:
   - DB=postgres
 before_script:
