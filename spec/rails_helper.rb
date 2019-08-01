@@ -10,6 +10,8 @@ require 'support/factory_bot'
 
 # run test automatically by Chrome
 Capybara.register_driver :chrome do |app|
+  Selenium::WebDriver::Chrome.driver_path = '/usr/bin/operadriver'
+  
 	options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
 
 	Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
