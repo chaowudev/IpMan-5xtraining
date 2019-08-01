@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :task do
-    user_id { user_id }
+    user
     title { 'task test' }
     description { 'this is task test' }
     status { 0 }

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "TaskManagements", type: :feature do
   # User need to sign in before task management
   let(:user) { create :user }  # let 是懶惰方法
+  let(:last_task) { Task.last }
   before { user }
   
   feature 'create task flow' do
@@ -28,19 +29,18 @@ RSpec.feature "TaskManagements", type: :feature do
       
       expect(page).to have_content 'Create Success'
       expect(Task.count).to eq 1
-      last_task = Task.last
-      validate_last_task(last_task)
+      validate_task_expectation(last_task)
     end
   end
   
   feature 'existence task flow' do
-    let(:task) { create :task, user_id: user.id }
+    let(:task) { create :task }
     before { task }
 
     scenario 'User reads task' do
       visit task_path(task)
       
-      validate_last_task(task)  
+      validate_task_expectation(task)  
     end
     
     scenario 'User edits task' do
@@ -51,7 +51,7 @@ RSpec.feature "TaskManagements", type: :feature do
       
       expect(page).to have_content 'Update Success'
       expect(Task.count).to eq 1
-      expect(Task.last.description).to eq 'test task updating'
+      expect(last_task.description).to eq 'test task updating'
     end
 
     scenario 'User deletes task' do
@@ -63,11 +63,11 @@ RSpec.feature "TaskManagements", type: :feature do
       page.driver.browser.switch_to.alert.accept
 
       expect(page).to have_content 'Delete Success'
-      expect(Task.last).to be_nil
+      expect(last_task).to be_nil
     end
   end
 
-  def validate_last_task(task)
+  def validate_task_expectation(task)
     expect(task.title).to eq 'task test'
     expect(task.status).to eq 'to_do' # -> 0 才是在 Model 的型態
     expect(task.emergency_level).to eq 'unimportant' # -> 0 才是在 Model 的型態
