@@ -1,16 +1,9 @@
 language: ruby
+cache: bundler
 rvm:
   - 2.6.0
-addons: # get google-chrome-stable
+addons:
   chrome: stable
-install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
-  - wget -N http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip -P ~/
-  - unzip ~/chromedriver_linux64.zip -d ~/
-  - rm ~/chromedriver_linux64.zip
-  - sudo mv -f ~/chromedriver /usr/local/share/
-  - sudo chmod +x /usr/local/share/chromedriver
-  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
-cache: bundler
 services:
   - postgresql
 env:
@@ -18,7 +11,5 @@ env:
 before_script:
   - cp config/database.yml.travis config/database.yml
 script:
-  - whereis google-chrome-stable
-  - whereis chromedriver
   - bundle exec rails db:setup RAILS_ENV=test
   - bundle exec rspec
