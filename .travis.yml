@@ -1,4 +1,6 @@
 language: ruby
+rvm:
+  - 2.6.0
 addons: # get google-chrome-stable
   chrome: stable
 install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
@@ -9,15 +11,12 @@ install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
   - sudo chmod +x /usr/local/share/chromedriver
   - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 cache: bundler
-rvm:
-  - 2.6.0
 services:
   - postgresql
 env:
   - DB=postgres
 before_script:
   - cp config/database.yml.travis config/database.yml
-  - ln -s /usr/lib/chromium-browser/chromedriver ~/bin/chromedriver
 script:
   - bundle exec rails db:setup RAILS_ENV=test
   - bundle exec rspec
