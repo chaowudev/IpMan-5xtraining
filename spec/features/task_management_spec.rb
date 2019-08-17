@@ -65,6 +65,38 @@ RSpec.feature "TaskManagements", type: :feature do
       expect(page).to have_content 'Delete Success'
       expect(last_task).to be_nil
     end
+
+    scenario 'Sort task as created time' do
+      visit tasks_path
+      page_items = page.all('.task-item')
+      
+      expect(page_items[0]).to have_content task.title
+      expect(Task.count).to eq 1
+
+      click_link 'New Task'
+
+      fill_in 'task[title]', with: 'new task'
+      find("option[value='to_do']", text: 'to_do').select_option
+      find("option[value='unimportant']", text: 'unimportant').select_option
+      within '.date-of-started-time-container' do
+        find("option[value='2019']", text: '2019').select_option
+        find("option[value='8']", text: 'August').select_option
+        find("option[value='17']", text: '17').select_option
+      end
+      within '.date-of-deadline-time-container' do
+        find("option[value='2019']", text: '2019').select_option
+        find("option[value='8']", text: 'August').select_option
+        find("option[value='18']", text: '18').select_option
+      end
+      fill_in 'task[description]', with: 'this is new task'
+      
+      click_button 'Create'
+      page_items = page.all('.task-item')
+
+      expect(page_items[0]).to have_content task.title
+      expect(page_items[1]).to have_content last_task.title
+      expect(Task.count).to eq 2
+    end
   end
 
   def validate_task_expectation(task)
