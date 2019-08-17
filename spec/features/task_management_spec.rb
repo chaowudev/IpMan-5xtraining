@@ -59,7 +59,7 @@ RSpec.feature "TaskManagements", type: :feature do
       click_link 'Delete'
       
       # rails_helper: Capybara::DSL provide some methods
-      expect(page.driver.browser.switch_to.alert.text).to eq 'Are you sure?'
+      expect(page.driver.browser.switch_to.alert.text).to eq 'Are you sure to delete this task?'
       page.driver.browser.switch_to.alert.accept
 
       expect(page).to have_content 'Delete Success'

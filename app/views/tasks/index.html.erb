@@ -1,20 +1,20 @@
-<h1>Task Index</h1>
+<h1><%= t('.index_title') %></h1>
 
-<%= link_to 'New Task', new_task_path %>
+<%= link_to t('.new_task'), new_task_path %>
 
 <%= form_tag tasks_path, method: :get do %>
-  <%= text_field_tag :search, params[:search], placeholder: 'Enter search text' %>
-  <%= submit_tag 'Search', name: nil %>
+  <%= text_field_tag :search, params[:search], placeholder: t('.search_text') %>
+  <%= submit_tag t('.search_button'), name: nil %>
 <% end %>
 
 <% @tasks.each.with_index do |task, index| %>
   <ul>
-    <li><p>(<%= index + 1 %>) Title: <%= task.title %></p></li>
+    <li><p>(<%= index + 1 %>)<%= t('attributes.title') %> <%= task.title %></p></li>
     <!-- 之後 nav-bar 有狀態頁籤後記得把 status 拿掉 -->
-    <li><p>Status: <%= task.status %> (<%= task.emergency_level %>)</p></li>
-    <li><p>Deadline: <%= task.deadline_at %></p></li>
+    <li><p><%= t('attributes.status') %><%= task.status %> (<%= task.emergency_level %>)</p></li>
+    <li><p><%= t('attributes.deadline_at') %><%= task.deadline_at %></p></li>
   </ul>
-  <%= link_to 'Show', task_path(task) %>
-  <%= link_to 'Edit', edit_task_path(task) %>
-  <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to t('attributes.task_show'), task_path(task) %>
+  <%= link_to t('attributes.task_edit'), edit_task_path(task) %>
+  <%= link_to t('attributes.task_delete'), task, method: :delete, data: { confirm: t('.delete_confirm') } %>
 <% end %>

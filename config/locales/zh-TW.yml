@@ -1,0 +1,55 @@
+"zh-TW":
+  attributes:
+    title: "標題："
+    description: "任務描述："
+    status: "狀態："
+    started_at: "開始日期："
+    deadline_at: "結束日期："
+    emergency_level: "優先程度："
+    task_index: "任務列表"
+    task_show: "查看細節"
+    task_edit: "編輯"
+    task_delete: "刪除"
+
+  tasks:
+    index:
+      index_title: "任務列表"
+      new_task: "新增任務"
+      search_text: "輸入文字搜尋"
+      search_button: "搜尋"
+      delete_confirm: "確定要刪除此任務嗎？"
+    new:
+      new_task: "新增任務"
+      create_button: "新增任務"
+    edit:
+      edit_title: "編輯任務"
+      update_button: "更新任務"
+    show:
+      show_title: "任務細節"
+
+  controller:
+    notice:
+      create_success: "新增任務成功"
+      create_failure: "新增任務失敗 請填寫所有欄位"
+      update_success: "更新任務成功"
+      update_failure: "更新任務失敗"
+      delete_success: "刪除任務成功"
+      
+  activerecord:
+    attributes:
+      task:
+        title: "標題"
+        description: "任務描述"
+        status: "狀態"
+        status:
+          zero: "待做事項"
+          one: "執行中"
+          two: "已完成"
+          three: "封存"
+        started_at: "開始日期"
+        deadline_at: "結束日期"
+        emergency_level: "優先程度"
+        emergency_level:
+          zero: "不重要"
+          one: "重要"
+          two: "緊急"

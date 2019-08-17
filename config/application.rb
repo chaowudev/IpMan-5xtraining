@@ -15,5 +15,12 @@ module IpMan5xtraining
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # where the I18n library should search for translation files.
+    # config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.default_locale = :en
+
+    # default lacale when translation missing
+    config.i18n.fallbacks = true
   end
 end
