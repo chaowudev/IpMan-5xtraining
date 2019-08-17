@@ -1,15 +1,16 @@
 "zh-TW":
   attributes:
-    title: "標題："
-    description: "任務描述："
-    status: "狀態："
-    started_at: "開始日期："
-    deadline_at: "結束日期："
-    emergency_level: "優先程度："
-    task_index: "任務列表"
-    task_show: "查看細節"
-    task_edit: "編輯"
-    task_delete: "刪除"
+    task:
+      title: "標題："
+      description: "任務描述："
+      status: "狀態："
+      started_at: "開始日期："
+      deadline_at: "結束日期："
+      emergency_level: "優先程度："
+      task_index: "任務列表"
+      task_show: "查看細節"
+      task_edit: "編輯"
+      task_delete: "刪除"
 
   tasks:
     index:

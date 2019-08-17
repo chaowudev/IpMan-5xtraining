@@ -1,12 +1,12 @@
 <h1><%= t('.show_title') %></h1>
 
-<%= link_to t('attributes.task_index'), tasks_path %>
-<%= link_to t('attributes.task_edit'), edit_task_path(@task) %>
-<%= link_to t('attributes.task_delete'), task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to t('attributes.task.task_index'), tasks_path %>
+<%= link_to t('attributes.task.task_edit'), edit_task_path(@task) %>
+<%= link_to t('attributes.task.task_delete'), task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <ul>
-  <li><p><%= t('attributes.title') %><%= @task.title %></p></li>
+  <li><p><%= t('attributes.task.title') %><%= @task.title %></p></li>
   <li><p><%= @task.started_at %> ~ <%= @task.deadline_at %></p></li>
-  <li><p><%= t('attributes.status') %><%= @task.status %> (<%= @task.emergency_level %>)</p></li>
-  <li><p><%= t('attributes.description') %><%= @task.description %></p></li>
+  <li><p><%= t('attributes.task.status') %><%= @task.status %> (<%= @task.emergency_level %>)</p></li>
+  <li><p><%= t('attributes.task.description') %><%= @task.description %></p></li>
 </ul>

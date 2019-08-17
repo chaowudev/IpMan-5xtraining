@@ -1,15 +1,16 @@
 en:
   attributes:
-    title: "Title:"
-    description: "Description:"
-    status: "Status:"
-    started_at: "Start Date:"
-    deadline_at: "Deadline Date:"
-    emergency_level: "Priority:"
-    task_index: "Task Index"
-    task_show: "Show Details"
-    task_edit: "Edit"
-    task_delete: "Delete"
+    task:
+      title: "Title:"
+      description: "Description:"
+      status: "Status:"
+      started_at: "Start Date:"
+      deadline_at: "Deadline Date:"
+      emergency_level: "Priority:"
+      task_index: "Task Index"
+      task_show: "Show Details"
+      task_edit: "Edit"
+      task_delete: "Delete"
 
   tasks:
     index:
