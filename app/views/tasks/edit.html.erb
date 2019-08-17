@@ -1,7 +1,7 @@
-<h1>Edit Task</h1>
+<h1><%= t('.edit_title') %></h1>
 
-<%= link_to 'Index', tasks_path %>
-<%= link_to 'Show', task_path %>
+<%= link_to t('attributes.task.task_index'), tasks_path %>
+<%= link_to t('attributes.task.task_show'), task_path %>
 
 <!-- partial render -->
-<%= render 'form', task: @task, action: :update, method: :patch, button: 'Update' %>
+<%= render 'form', task: @task, action: :update, method: :patch, button: t('.update_button') %>

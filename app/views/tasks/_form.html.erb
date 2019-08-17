@@ -2,33 +2,32 @@
 <%= form_for task, url: { controller: :tasks, action: action }, html: { method: method } do |f| %>
 
   <div>
-    <%= f.label :title, 'Title:' %>
+    <%= f.label :title, t('attributes.task.title') %>
     <%= f.text_field :title, autofocus: true %>
   </div>
 
   <div>
-    <%= f.label :status, 'Status:' %>
+    <%= f.label :status, t('attributes.task.status') %>
     <%= f.select :status, options_for_select(@statuses) %>
   </div>
 
   <div>
-    <%= f.label :emergency_level, 'Priority:' %>
+    <%= f.label :emergency_level, t('attributes.task.emergency_level') %>
     <%= f.select :emergency_level, options_for_select(@emergency_levels) %>
   </div>
 
   <div class="date-of-started-time-container">
-    <%= f.label :started_at, 'Started_at:' %>
+    <%= f.label :started_at, t('attributes.task.started_at') %>
     <%= f.date_select :started_at, order: %i[year month day] %>
   </div>
 
   <div class="date-of-deadline-time-container">
-    <%= f.label :deadline_at, 'Deadline_at:' %>
+    <%= f.label :deadline_at, t('attributes.task.deadline_at') %>
     <%= f.date_select :deadline_at, order: %i[year month day] %>
   </div>
   
-
   <div>
-    <%= f.label :description, 'Description:' %>
+    <%= f.label :description, t('attributes.task.description') %>
     <%= f.text_area :description %>
   </div>
 
