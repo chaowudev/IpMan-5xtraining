@@ -65,6 +65,24 @@ RSpec.feature "TaskManagements", type: :feature do
       expect(page).to have_content 'Delete Success'
       expect(last_task).to be_nil
     end
+
+    describe 'Sort task as created time' do
+      let(:first_task) { create :task, title: 'first task', created_at: '2019-08-17 04:00:00' }
+      let(:second_task) { create :task, title: 'second task', created_at: '2019-08-17 06:00:00' }
+
+      before do
+        first_task
+        second_task
+      end
+
+      scenario 'Has correct order by created_at' do
+        visit tasks_path
+        page_items = page.all('.task-item')
+
+        expect(page_items[0]).to have_content first_task.title
+        expect(page_items[1]).to have_content second_task.title
+      end
+    end
   end
 
   def validate_task_expectation(task)
