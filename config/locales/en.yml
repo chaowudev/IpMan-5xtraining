@@ -11,6 +11,7 @@ en:
       task_show: "Show Details"
       task_edit: "Edit"
       task_delete: "Delete"
+      delete_confirm: "Are you sure to delete this task?"
 
   tasks:
     index:
@@ -18,7 +19,6 @@ en:
       new_task: "New Task"
       search_text: "Enter search text"
       search_button: "Search"
-      delete_confirm: "Are you sure to delete this task?"
     new:
       new_task: "New Task"
       create_button: "Create"

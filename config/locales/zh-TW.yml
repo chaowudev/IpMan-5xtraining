@@ -11,6 +11,7 @@
       task_show: "查看細節"
       task_edit: "編輯"
       task_delete: "刪除"
+      delete_confirm: "確定要刪除此任務嗎？"
 
   tasks:
     index:
@@ -18,7 +19,6 @@
       new_task: "新增任務"
       search_text: "輸入文字搜尋"
       search_button: "搜尋"
-      delete_confirm: "確定要刪除此任務嗎？"
     new:
       new_task: "新增任務"
       create_button: "新增任務"

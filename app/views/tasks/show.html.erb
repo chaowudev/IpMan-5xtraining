@@ -2,7 +2,7 @@
 
 <%= link_to t('attributes.task.task_index'), tasks_path %>
 <%= link_to t('attributes.task.task_edit'), edit_task_path(@task) %>
-<%= link_to t('attributes.task.task_delete'), task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to t('attributes.task.task_delete'), task_path(@task), method: :delete, data: { confirm: t('attributes.task.delete_confirm') } %>
 
 <ul>
   <li><p><%= t('attributes.task.title') %><%= @task.title %></p></li>
