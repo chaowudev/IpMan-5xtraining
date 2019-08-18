@@ -17,4 +17,3 @@ You can see prototype here: [Hand-painted prototype](./prototype/README.md)
 
 ## ER Diagram:
 ![IpMan ER-Model](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/19.07.08_ipman_ERD.jpg)
-  
