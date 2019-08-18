@@ -1,30 +1,20 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # IpMan-5xtraining
 
-- [Hand-painted prototype](./prototype/README.md)
+IpMan-5xtraining is To-do list system for 5xruby.
+You can see prototype here: [Hand-painted prototype](./prototype/README.md)
 
-- IpMan ER-Model:
+## Getting Started
+- Ruby version: 2.6.0
+- Rails version: 5.2.3
+- PostgreSQL version: 11.3
+
+## Test Suit
+  1. Install Google Chrome web-driver.
+  2. Enter to project, e.g. `$ cd IpMan-5xtraining`
+  3. `$ rspec`
+
+## Deploy Step:
+
+## ER Diagram:
 ![IpMan ER-Model](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/19.07.08_ipman_ERD.jpg)
+  
