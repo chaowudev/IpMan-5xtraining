@@ -46,11 +46,15 @@ class TasksController < ApplicationController
 
   def search
     if params[:search]
-      @search_params = params[:search].downcase
-      @tasks = Task.search_title_and_description(@search_params)
+      search_params = params[:search].downcase
+      @tasks = Task.search_title_and_description(search_params)
     else
-      @tasks = Task.order(:created_at)
+      @tasks = Task.sort_by_date(sort_column)
     end
+  end
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
   end
   
   def options_content

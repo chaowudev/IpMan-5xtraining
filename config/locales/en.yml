@@ -17,6 +17,8 @@ en:
     index:
       index_title: "Task Index"
       new_task: "New Task"
+      sort_by_created_date: "Created Date"
+      sort_by_deadline_date: "Deadline Date"
       search_text: "Enter search text"
       search_button: "Search"
     new:
