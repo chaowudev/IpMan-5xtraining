@@ -25,13 +25,17 @@ en:
     edit:
       edit_title: "Edit Task"
       update_button: "Update"
+    form:
+      there_are: "There are "
+      error: "error"
+      errors: "errors"
     show:
       show_title: "Task Details"
 
   controller:
     notice:
       create_success: "Create Successfully"
-      create_failure: "Create Failure, please fill in all columns"
+      create_failure: "Create Failure"
       update_success: "Update Successfully"
       update_failure: "Update Failure"
       delete_success: "Delete Successfully"
@@ -39,18 +43,27 @@ en:
   activerecord:
     attributes:
       task:
-        title: "Title:"
-        description: "Description:"
-        status: "Status:"
+        title: "Title"
+        description: "Description"
+        status: "Status"
         status:
           zero: "To Do"
           one: "Doing"
           two: "Done"
           three: "Achive"
-        started_at: "Start Date:"
-        deadline_at: "Deadline Date:"
-        emergency_level: "Priority:"
+        started_at: "Start Date"
+        deadline_at: "Deadline Date"
+        emergency_level: "Priority"
         emergency_level:
           zero: "Unimportant"
           one: "Important"
           two: "Urgent"
+
+    errors:
+      models:
+        task:
+          attributes:
+            title:
+              blank: "can' t be blank!"
+            deadline_at:
+              incorrect_deadline: "should be later than start time!"

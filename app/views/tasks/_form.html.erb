@@ -36,3 +36,16 @@
   </div>
 
 <% end %>
+
+<% if task.errors.any? %>
+  <div class="errors-explanation">
+    <div class="alert-error">
+      <p><%= t('.there_are') %><%= pluralize task.errors.count, t('.error'), plural: t('.errors') %></p>
+    </div>
+    <ul>
+      <% task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
