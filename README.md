@@ -8,15 +8,20 @@
 - PostgreSQL version: 11.3
 
 ## Test Suit
-  1. Install Google Chrome web-driver.
-  2. Use `$ cd IpMan-5xtraining` to enter project.
+  1. Install Google Chrome web-driver
+  2. Use `$ cd IpMan-5xtraining` to enter project
   3. `$ rspec`
 
 ## Deploy Step:
+
+IpMan-5xtraining is deployed on heroku and performed with Git.
+
   1. `$ heroku create ip-man-5xtraining`
   2. Use `$ git remote -v` to check remote which is the name as heroku
+
     - heroku  https://git.heroku.com/ip-man-5xtraining.git (fetch)
     - heroku  https://git.heroku.com/ip-man-5xtraining.git (push)
+
   3. `$ git push heroku master`
   4. `$ heroku run rails db:migrate`
   5. Use `$ heroku pg:psql` to establish a psql session with remote database
