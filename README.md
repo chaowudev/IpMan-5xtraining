@@ -25,6 +25,7 @@ IpMan-5xtraining is deployed on heroku and performed with Git.
   3. `$ git push heroku master`
   4. `$ heroku run rails db:migrate`
   5. Use `$ heroku pg:psql` to establish a psql session with remote database
+  6. Conect IpMan-5xtraining: https://ip-man-5xtraining.herokuapp.com
 
 ## ER Diagram:
 ![IpMan ER-Model](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/19.07.08_ipman_ERD.jpg)

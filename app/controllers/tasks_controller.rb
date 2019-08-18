@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
-  before_action :search, only: :index
+  before_action :search, only: %i[index deadline_date]
+  before_action :create_date, only: :index
 
   def index
   end
@@ -41,15 +42,23 @@ class TasksController < ApplicationController
     @task.destroy
     redirect_to tasks_path, notice: t('controller.notice.delete_success')
   end
+
+  def deadline_date
+    @tasks = Task.sort_by_deadline_date
+  end
   
   private
+
+  def create_date
+    @tasks = Task.sort_by_created_date
+  end
 
   def search
     if params[:search]
       @search_params = params[:search].downcase
       @tasks = Task.search_title_and_description(@search_params)
     else
-      @tasks = Task.order(:created_at)
+      @tasks = Task.sort_by_created_date
     end
   end
   

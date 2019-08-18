@@ -1,0 +1,22 @@
+<h1><%= t('.index_title') %></h1>
+
+<%= link_to t('.new_task'), new_task_path %>
+<%= link_to t('.sort_by_created_date'), tasks_path %>
+<%= link_to t('.sort_by_deadline_date'), deadline_date_tasks_path %>
+
+<%= form_tag path, method: :get do %>
+  <%= text_field_tag :search, params[:search], placeholder: t('.search_text') %>
+  <%= submit_tag t('.search_button'), name: nil %>
+<% end %>
+
+<% tasks.each.with_index do |task, index| %>
+  <ul class="task-item">
+    <li><p>(<%= index + 1 %>)<%= t('attributes.task.title') %> <%= task.title %></p></li>
+    <!-- 之後 nav-bar 有狀態頁籤後記得把 status 拿掉 -->
+    <li><p><%= t('attributes.task.status') %><%= task.status %> (<%= task.emergency_level %>)</p></li>
+    <li><p><%= t('attributes.task.deadline_at') %><%= task.deadline_at %></p></li>
+  </ul>
+  <%= link_to t('attributes.task.task_show'), task_path(task) %>
+  <%= link_to t('attributes.task.task_edit'), edit_task_path(task) %>
+  <%= link_to t('attributes.task.task_delete'), task, method: :delete, data: { confirm: t('attributes.task.delete_confirm') } %>
+<% end %>

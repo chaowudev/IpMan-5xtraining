@@ -5,7 +5,7 @@ FactoryBot.define do
     description { 'this is task test' }
     status { 0 }
     started_at { '2019-07-11' }
-    deadline_at { '2019-07-12' }
+    deadline_at { '2019-08-20' }
     emergency_level { 0 }
   end
 end

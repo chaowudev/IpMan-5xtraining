@@ -10,8 +10,12 @@ class Task < ApplicationRecord
 
   validates :user_id, :title, :status, :started_at, :deadline_at, :emergency_level, presence: true
 
-  # 邏輯
+  # search logic
   scope :search_title_and_description, -> (search_params) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%") }
+
+  # sort task logic
+  scope :sort_by_created_date, -> { order(:created_at) }
+  scope :sort_by_deadline_date, -> { order(:deadline_at) }
 
   # def starte_time_later_than_deadline
   #   errors.add(:deadline_at, I18n.t('activerecord.errors.messages.incorrect_deadline')) if deadline_at < started_at

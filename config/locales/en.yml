@@ -14,9 +14,11 @@ en:
       delete_confirm: "Are you sure to delete this task?"
 
   tasks:
-    index:
+    items:
       index_title: "Task Index"
       new_task: "New Task"
+      sort_by_created_date: "Sort by bulid date"
+      sort_by_deadline_date: "Sort by deadline date"
       search_text: "Enter search text"
       search_button: "Search"
     new:
