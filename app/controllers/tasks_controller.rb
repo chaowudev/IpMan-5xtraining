@@ -58,7 +58,7 @@ class TasksController < ApplicationController
       @search_params = params[:search].downcase
       @tasks = Task.search_title_and_description(@search_params)
     else
-      @tasks = Task.sort_by_created_date
+      create_date
     end
   end
   

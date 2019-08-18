@@ -13,9 +13,9 @@ class Task < ApplicationRecord
   # search logic
   scope :search_title_and_description, -> (search_params) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%") }
 
-  # sort task logic
-  scope :sort_by_created_date, -> { order(:created_at) }
-  scope :sort_by_deadline_date, -> { order(:deadline_at) }
+  # sort task logic 再加入分頁功能後，將 limit method 拿掉
+  scope :sort_by_created_date, -> { order(:created_at).limit(20) }
+  scope :sort_by_deadline_date, -> { order(:deadline_at).limit(20) }
 
   # def starte_time_later_than_deadline
   #   errors.add(:deadline_at, I18n.t('activerecord.errors.messages.incorrect_deadline')) if deadline_at < started_at
