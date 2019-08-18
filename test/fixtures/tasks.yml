@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  title: MyString
+  description: MyText
+  status: 1
+  started_at: 2019-07-09
+  deadline_at: 2019-07-09
+  emergency_level: 1
+
+two:
+  user: two
+  title: MyString
+  description: MyText
+  status: 1
+  started_at: 2019-07-09
+  deadline_at: 2019-07-09
+  emergency_level: 1

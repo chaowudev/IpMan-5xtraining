@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IpMan5xtraining</title>
+    <title>Ip Man</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,11 @@
   </head>
 
   <body>
+
+    <%= link_to '中文', locale: "zh-TW" %>
+    <%= link_to 'English', locale: "en" %>
+    
+    <%= notice %>
     <%= yield %>
   </body>
 </html>

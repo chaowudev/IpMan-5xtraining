@@ -1,33 +1,69 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  attributes:
+    task:
+      title: "Title:"
+      description: "Description:"
+      status: "Status:"
+      started_at: "Start Date:"
+      deadline_at: "Deadline Date:"
+      emergency_level: "Priority:"
+      task_index: "Task Index"
+      task_show: "Show Details"
+      task_edit: "Edit"
+      task_delete: "Delete"
+      delete_confirm: "Are you sure to delete this task?"
+
+  tasks:
+    index:
+      index_title: "Task Index"
+      new_task: "New Task"
+      search_text: "Enter search text"
+      search_button: "Search"
+    new:
+      new_task: "New Task"
+      create_button: "Create"
+    edit:
+      edit_title: "Edit Task"
+      update_button: "Update"
+    form:
+      there_are: "There are "
+      error: "error"
+      errors: "errors"
+    show:
+      show_title: "Task Details"
+
+  controller:
+    notice:
+      create_success: "Create Successfully"
+      create_failure: "Create Failure"
+      update_success: "Update Successfully"
+      update_failure: "Update Failure"
+      delete_success: "Delete Successfully"
+      
+  activerecord:
+    attributes:
+      task:
+        title: "Title"
+        description: "Description"
+        status: "Status"
+        status:
+          zero: "To Do"
+          one: "Doing"
+          two: "Done"
+          three: "Achive"
+        started_at: "Start Date"
+        deadline_at: "Deadline Date"
+        emergency_level: "Priority"
+        emergency_level:
+          zero: "Unimportant"
+          one: "Important"
+          two: "Urgent"
+
+    errors:
+      models:
+        task:
+          attributes:
+            title:
+              blank: "can' t be blank!"
+            deadline_at:
+              incorrect_deadline: "should be later than start time!"

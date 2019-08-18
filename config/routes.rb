@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # 暫時把任務列表設為根目錄
+  root 'tasks#index'
+
+  resources :tasks
+
 end
