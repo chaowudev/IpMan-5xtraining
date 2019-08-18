@@ -94,6 +94,7 @@ RSpec.feature "TaskManagements", type: :feature do
 
         expect(page_items[0]).to have_content second_task.title
         expect(page_items[1]).to have_content first_task.title
+        expect(page_items[2]).to have_content task.title
       end
     end
   end
