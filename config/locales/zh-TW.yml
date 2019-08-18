@@ -25,13 +25,17 @@
     edit:
       edit_title: "編輯任務"
       update_button: "更新任務"
+    form:
+      there_are: "這裡有 "
+      error: "個錯誤"
+      errors: "個錯誤"
     show:
       show_title: "任務細節"
 
   controller:
     notice:
       create_success: "新增任務成功"
-      create_failure: "新增任務失敗 請填寫所有欄位"
+      create_failure: "新增任務失敗"
       update_success: "更新任務成功"
       update_failure: "更新任務失敗"
       delete_success: "刪除任務成功"
@@ -54,3 +58,12 @@
           zero: "不重要"
           one: "重要"
           two: "緊急"
+
+    errors:
+      models:
+        task:
+          attributes:
+            title:
+              blank: "不得為空白"
+            deadline_at:
+              incorrect_deadline: "不得晚於開始日期"
