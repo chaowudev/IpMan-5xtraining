@@ -16,6 +16,23 @@ class Task < ApplicationRecord
   # sort task logic 分頁功能做完後要把 limit method 拿掉
   scope :sort_by_date, -> (created_date_or_deadline_date) { order(created_date_or_deadline_date).limit(20) }
 
+  # search status logic 分頁功能做完後要把 limit method 拿掉
+  # 這邊應該有 scope 的做法，目前卡在 enum 無法與搜尋的字串做比對... 找不到 SQL 語法...
+  def self.search_status(search_params)
+    case search_params
+    when 'todo'
+      Task.where(status: 'to_do').limit(10)
+    when 'doing'
+      Task.where(status: 'doing').limit(10)
+    when 'done'
+      Task.where(status: 'done').limit(10)
+    when 'achive'
+      Task.where(status: 'achive').limit(10)
+    else
+      Task.all.limit(10)
+    end
+  end
+
   # def starte_time_later_than_deadline
   #   errors.add(:deadline_at, I18n.t('activerecord.errors.messages.incorrect_deadline')) if deadline_at < started_at
   # end
