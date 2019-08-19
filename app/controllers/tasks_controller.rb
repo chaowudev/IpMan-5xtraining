@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
-  before_action :search, only: :index
+  before_action :search_tasks, only: :index
+  before_action :search_status, only: :index
 
   def index
   end
@@ -44,12 +45,19 @@ class TasksController < ApplicationController
   
   private
 
-  def search
+  def search_tasks
     if params[:search]
       search_params = params[:search].downcase
       @tasks = Task.search_title_and_description(search_params)
     else
       @tasks = Task.sort_by_date(sort_column)
+    end
+  end
+
+  def search_status
+    if params[:search]
+      search_params = params[:search].downcase
+      @tasks = Task.search_status(search_params)
     end
   end
 
