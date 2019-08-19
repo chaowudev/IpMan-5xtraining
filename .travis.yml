@@ -19,5 +19,7 @@ dist: trusty
 addons:
   chrome: stable
 script:
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
   - bundle exec rails db:setup RAILS_ENV=test
   - bundle exec rspec
