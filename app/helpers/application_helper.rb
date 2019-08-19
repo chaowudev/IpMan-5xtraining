@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def sortable(column, link_name)
-    link_to link_name, sort: column
+  def link_to_with_sort(name, table_column)
+    link_to name, sort: table_column
   end
 end

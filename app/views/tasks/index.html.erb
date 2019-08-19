@@ -2,8 +2,8 @@
 
 <%= link_to t('.new_task'), new_task_path %>
 
-<%= sortable :created_at, t('.sort_by_created_date') %>
-<%= sortable :deadline_at, t('.sort_by_deadline_date') %>
+<%= link_to_with_sort t('.sort_by_created_date'), :created_at %>
+<%= link_to_with_sort t('.sort_by_deadline_date'), :deadline_at %>
 
 <%= form_tag tasks_path, method: :get do %>
   <%= text_field_tag :search, params[:search], placeholder: t('.search_text') %>
