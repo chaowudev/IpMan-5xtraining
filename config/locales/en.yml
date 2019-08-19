@@ -19,7 +19,7 @@ en:
       new_task: "New Task"
       sort_by_created_date: "Created Date"
       sort_by_deadline_date: "Deadline Date"
-      search_text: "Enter search text"
+      search_text: "Search tasks or status"
       search_button: "Search"
     new:
       new_task: "New Task"
