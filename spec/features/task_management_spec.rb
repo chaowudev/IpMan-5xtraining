@@ -78,6 +78,7 @@ RSpec.feature "TaskManagements", type: :feature do
       scenario 'Default sorting by created_at' do
         visit tasks_path
 
+        expect(page).to have_selector('.task-item', count: 3)
         expectation_sorting_by_created_at(page_items)
       end
 
@@ -85,6 +86,7 @@ RSpec.feature "TaskManagements", type: :feature do
         visit tasks_path
         click_link 'Created Date'
 
+        expect(page).to have_selector('.task-item', count: 3)
         expectation_sorting_by_created_at(page_items)
       end
 
@@ -92,8 +94,10 @@ RSpec.feature "TaskManagements", type: :feature do
         visit tasks_path
         click_link 'Deadline Date'
 
+        expect(page).to have_selector('.task-item', count: 3)
         expect(page_items[0]).to have_content second_task.title
         expect(page_items[1]).to have_content first_task.title
+        expect(page_items[2]).to have_content task.title
       end
     end
   end
@@ -112,7 +116,8 @@ RSpec.feature "TaskManagements", type: :feature do
   end
 
   def expectation_sorting_by_created_at(items)
-    expect(items[0]).to have_content first_task.title
-    expect(items[1]).to have_content second_task.title
+    expect(items[0]).to have_content task.title
+    expect(items[1]).to have_content first_task.title
+    expect(items[2]).to have_content second_task.title
   end
 end
