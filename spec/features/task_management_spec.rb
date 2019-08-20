@@ -20,8 +20,8 @@ RSpec.feature "TaskManagements", type: :feature do
       end
       within '.date-of-deadline-time-container' do
         find("option[value='2019']", text: '2019').select_option
-        find("option[value='7']", text: 'July').select_option
-        find("option[value='12']", text: '12').select_option
+        find("option[value='8']", text: 'August').select_option
+        find("option[value='20']", text: '20').select_option
       end
       fill_in 'task[description]', with: 'this is task test'
       
@@ -66,21 +66,38 @@ RSpec.feature "TaskManagements", type: :feature do
       expect(last_task).to be_nil
     end
 
-    describe 'Sort task as created time' do
-      let(:first_task) { create :task, title: 'first task', created_at: '2019-08-17 04:00:00' }
-      let(:second_task) { create :task, title: 'second task', created_at: '2019-08-17 06:00:00' }
+    describe 'Sort task by date' do
+      let(:first_task) { create :task, title: 'first task', deadline_at: '2019-08-19', created_at: '2019-08-17 04:00:00' }
+      let(:second_task) { create :task, title: 'second task', deadline_at: '2019-08-18', created_at: '2019-08-17 06:00:00' }
 
       before do
         first_task
         second_task
       end
 
+      scenario 'Default sorting by created_at' do
+        visit tasks_path
+
+        expect(page).to have_selector('.task-item', count: 3)
+        expectation_sorting_by_created_at(page_items)
+      end
+
       scenario 'Has correct order by created_at' do
         visit tasks_path
-        page_items = page.all('.task-item')
+        click_link 'Created Date'
 
-        expect(page_items[0]).to have_content first_task.title
-        expect(page_items[1]).to have_content second_task.title
+        expect(page).to have_selector('.task-item', count: 3)
+        expectation_sorting_by_created_at(page_items)
+      end
+
+      scenario 'Has correct order by deadline_at' do
+        visit tasks_path
+        click_link 'Deadline Date'
+
+        expect(page).to have_selector('.task-item', count: 3)
+        expect(page_items[0]).to have_content second_task.title
+        expect(page_items[1]).to have_content first_task.title
+        expect(page_items[2]).to have_content task.title
       end
     end
   end
@@ -90,7 +107,17 @@ RSpec.feature "TaskManagements", type: :feature do
     expect(task.status).to eq 'to_do' # -> 0 才是在 Model 的型態
     expect(task.emergency_level).to eq 'unimportant' # -> 0 才是在 Model 的型態
     expect(task.started_at.to_s).to eq '2019-07-11'
-    expect(task.deadline_at.to_s).to eq '2019-07-12'
+    expect(task.deadline_at.to_s).to eq '2019-08-20'
     expect(task.description).to eq 'this is task test'    
+  end
+
+  def page_items
+    page.all('.task-item')
+  end
+
+  def expectation_sorting_by_created_at(items)
+    expect(items[0]).to have_content task.title
+    expect(items[1]).to have_content first_task.title
+    expect(items[2]).to have_content second_task.title
   end
 end

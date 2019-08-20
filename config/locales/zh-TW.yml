@@ -17,6 +17,8 @@
     index:
       index_title: "任務列表"
       new_task: "新增任務"
+      sort_by_created_date: "以建立日期排序"
+      sort_by_deadline_date: "以結束日期排序"
       search_text: "輸入文字搜尋"
       search_button: "搜尋"
     new:
