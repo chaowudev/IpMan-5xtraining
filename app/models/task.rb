@@ -11,25 +11,32 @@ class Task < ApplicationRecord
   validates :user_id, :title, :status, :started_at, :deadline_at, :emergency_level, presence: true
 
   # search logic 分頁功能做完後要把 limit method 拿掉
-  scope :search_title_and_description, -> (search_params) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%").limit(20) }
+  scope :search_title_and_description, -> (search_params) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%") }
 
   # sort task logic 分頁功能做完後要把 limit method 拿掉
-  scope :sort_by_date, -> (created_date_or_deadline_date) { order(created_date_or_deadline_date).limit(20) }
+  scope :sort_by_date, -> (created_date_or_deadline_date) { order(created_date_or_deadline_date) }
+  
+  # 可以改用這樣的方式寫
+  # scope :test, -> (txt) do
+  #   key = search_status_key(txt)
+  #   or_sql = key.present? ? "OR status = #{Task.statuses[key]}" : ''
+  #   where("title LIKE ?#{or_sql}", key)
+  # end
 
   # search status logic 分頁功能做完後要把 limit method 拿掉
   # 這邊應該有 scope 的做法，目前卡在 enum 無法與搜尋的字串做比對... 找不到 SQL 語法...
   def self.search_status(search_params)
     case search_params
     when 'todo'
-      Task.where(status: 'to_do').limit(10)
+      where(status: 'to_do')
     when 'doing'
-      Task.where(status: 'doing').limit(10)
+      where(status: 'doing')
     when 'done'
-      Task.where(status: 'done').limit(10)
+      where(status: 'done')
     when 'achive'
-      Task.where(status: 'achive').limit(10)
+      where(status: 'achive')
     else
-      Task.all.limit(10)
+      all
     end
   end
 

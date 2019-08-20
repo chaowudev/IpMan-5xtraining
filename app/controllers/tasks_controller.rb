@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
   before_action :search_tasks, only: :index
-  before_action :search_status, only: :index
+  # before_action :search_status, only: :index
 
   def index
   end
@@ -48,9 +48,9 @@ class TasksController < ApplicationController
   def search_tasks
     if params[:search]
       search_params = params[:search].downcase
-      @tasks = Task.search_title_and_description(search_params)
+      @tasks = Task.search_title_and_description(search_params).search_status(search_params).limit(20)
     else
-      @tasks = Task.sort_by_date(sort_column)
+      @tasks = Task.sort_by_date(sort_column).search_status(search_params).limit(20)
     end
   end
 

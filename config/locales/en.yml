@@ -69,3 +69,8 @@ en:
               blank: "can' t be blank!"
             deadline_at:
               incorrect_deadline: "should be later than start time!"
+  enum:
+    task:
+      status:
+        :to_do: '待辦'
+        :doing: '進行中'

@@ -69,3 +69,9 @@
               blank: "不得為空白"
             deadline_at:
               incorrect_deadline: "不得晚於開始日期"
+  enum:
+    task:
+      status:
+        :to_do: '待辦'
+        :doing: '進行中'
+        
