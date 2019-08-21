@@ -53,9 +53,9 @@ class TasksController < ApplicationController
   def search
     if params[:search]
       search_params = params[:search].downcase
-      @tasks = Task.search_title_and_description(search_params)
+      @tasks = Task.search_title_and_description(search_params).page(params[:page]).per(5)
     else
-      @tasks = Task.sort_by_date(sort_column)
+      @tasks = Task.sort_by_date(sort_column).page(params[:page]).per(5)
     end
   end
 
@@ -65,8 +65,7 @@ class TasksController < ApplicationController
 
   def priority_sort_direction
     direction = params[:direction] == 'desc' ? 'desc' : 'asc'
-    # after having pagination, delete limit method
-    @tasks = Task.sort_priority_by(direction).limit(20)
+    @tasks = Task.sort_priority_by(direction).page(params[:page]).per(5)
   end
 
   def options_content

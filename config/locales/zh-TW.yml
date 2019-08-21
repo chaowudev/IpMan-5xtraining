@@ -12,6 +12,13 @@
       task_edit: "編輯"
       task_delete: "刪除"
       delete_confirm: "確定要刪除此任務嗎？"
+  views:
+    pagination:
+      first: "第一頁"
+      previous: "上一頁"
+      next: "下一頁"
+      last: "最後一頁"
+
 
   tasks:
     index:
