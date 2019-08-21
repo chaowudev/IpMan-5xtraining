@@ -15,6 +15,7 @@ class Task < ApplicationRecord
 
   # sort task logic 分頁功能做完後要把 limit method 拿掉
   scope :sort_by_date, -> (created_date_or_deadline_date) { order(created_date_or_deadline_date).limit(20) }
+  scope :sort_priority_by, -> (order = 'asc') { order(emergency_level: order) }
 
   # def starte_time_later_than_deadline
   #   errors.add(:deadline_at, I18n.t('activerecord.errors.messages.incorrect_deadline')) if deadline_at < started_at

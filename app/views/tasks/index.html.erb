@@ -2,8 +2,12 @@
 
 <%= link_to t('.new_task'), new_task_path %>
 
-<%= link_to_with_sort t('.sort_by_created_date'), :created_at %>
-<%= link_to_with_sort t('.sort_by_deadline_date'), :deadline_at %>
+<div>
+  <%= link_to_with_sort t('.sort_by_created_date'), :created_at %>
+  <%= link_to_with_sort t('.sort_by_deadline_date'), :deadline_at %>
+  <%= link_to_with_sort_as_asc t('.sort_by_priority_as_asc'), :emergency_level %>
+  <%= link_to_with_sort_as_desc t('.sort_by_priority_as_desc'), :emergency_level %>
+</div>
 
 <%= form_tag tasks_path, method: :get do %>
   <%= text_field_tag :search, params[:search], placeholder: t('.search_text') %>

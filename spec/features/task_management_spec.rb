@@ -66,9 +66,9 @@ RSpec.feature "TaskManagements", type: :feature do
       expect(last_task).to be_nil
     end
 
-    describe 'Sort task by date' do
-      let(:first_task) { create :task, title: 'first task', deadline_at: '2019-08-19', created_at: '2019-08-17 04:00:00' }
-      let(:second_task) { create :task, title: 'second task', deadline_at: '2019-08-18', created_at: '2019-08-17 06:00:00' }
+    describe 'Sort task flow' do
+      let(:first_task) { create :task, title: 'first task', emergency_level: 1, deadline_at: '2019-08-19', created_at: '2019-08-17 04:00:00' }
+      let(:second_task) { create :task, title: 'second task', emergency_level: 2, deadline_at: '2019-08-18', created_at: '2019-08-17 06:00:00' }
 
       before do
         first_task
@@ -98,6 +98,76 @@ RSpec.feature "TaskManagements", type: :feature do
         expect(page_items[0]).to have_content second_task.title
         expect(page_items[1]).to have_content first_task.title
         expect(page_items[2]).to have_content task.title
+      end
+
+      scenario 'Has correct order by priority as asc' do
+        visit tasks_path
+        click_link 'Unimportant Priorit'
+
+        expect(page).to have_selector('.task-item', count: 3)
+        expect(page_items[0]).to have_content task.title
+        expect(page_items[1]).to have_content first_task.title
+        expect(page_items[2]).to have_content second_task.title
+      end
+
+      scenario 'Has correct order by priority as desc' do
+        visit tasks_path
+        click_link 'Urgent Priority'
+
+        expect(page).to have_selector('.task-item', count: 3)
+        expect(page_items[0]).to have_content second_task.title
+        expect(page_items[1]).to have_content first_task.title
+        expect(page_items[2]).to have_content task.title
+      end
+    end
+
+    describe 'Search task flow' do
+      let(:chinese_task) { create :task, title: '中文', description: '這是中文任務描述' }
+      let(:english_task) { create :task, title: 'English', description: 'THIS IS ENGLISH TASK' }
+
+      before do
+        chinese_task
+        english_task
+      end
+      
+      scenario 'Can search by task title as Chinese' do
+        visit tasks_path
+        
+        fill_in 'search', with: '中文'
+        click_button 'Search'
+
+        expect(page).to have_selector('.task-item', count: 1)
+        expect(page).to have_content chinese_task.title
+      end
+
+      scenario 'Can search by task title as English and case insensitive' do
+        visit tasks_path
+        
+        fill_in 'search', with: 'ENGLISH'
+        click_button 'Search'
+
+        expect(page).to have_selector('.task-item', count: 1)
+        expect(page).to have_content english_task.title
+      end
+
+      scenario 'Can search by task description as Chinese' do
+        visit tasks_path
+        
+        fill_in 'search', with: '任務'
+        click_button 'Search'
+
+        expect(page).to have_selector('.task-item', count: 1)
+        expect(page).to have_content chinese_task.title
+      end
+
+      scenario 'Can search by task description as English and case insensitive' do
+        visit tasks_path
+        
+        fill_in 'search', with: 'TASK'
+        click_button 'Search'
+
+        expect(page).to have_selector('.task-item', count: 2)
+        expect(page).to have_content task.title, english_task.title
       end
     end
   end

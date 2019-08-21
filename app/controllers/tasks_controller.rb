@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
   before_action :search, only: :index
+  before_action :sort_with_type, only: :index
 
   def index
   end
@@ -44,6 +45,11 @@ class TasksController < ApplicationController
   
   private
 
+  def sort_with_type
+    return search if params[:direction].blank?
+    priority_sort_direction
+  end
+
   def search
     if params[:search]
       search_params = params[:search].downcase
@@ -56,7 +62,13 @@ class TasksController < ApplicationController
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
   end
-  
+
+  def priority_sort_direction
+    direction = params[:direction] == 'desc' ? 'desc' : 'asc'
+    # after having pagination, delete limit method
+    @tasks = Task.sort_priority_by(direction).limit(20)
+  end
+
   def options_content
     @statuses = Task.statuses.keys
     @emergency_levels = Task.emergency_levels.keys
