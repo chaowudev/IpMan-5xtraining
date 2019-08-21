@@ -1,12 +1,12 @@
 en:
   attributes:
     task:
-      title: "Title:"
-      description: "Description:"
-      status: "Status:"
-      started_at: "Start Date:"
-      deadline_at: "Deadline Date:"
-      emergency_level: "Priority:"
+      title: "Title"
+      description: "Description"
+      status: "Status"
+      started_at: "Start Date"
+      deadline_at: "Deadline Date"
+      emergency_level: "Priority"
       task_index: "Task Index"
       task_show: "Show Details"
       task_edit: "Edit"
@@ -25,10 +25,10 @@ en:
       new_task: "New Task"
       sort_by_created_date: "Created Date"
       sort_by_deadline_date: "Deadline Date"
-      sort_by_priority_as_asc: "Unimportant Priority"
-      sort_by_priority_as_desc: "Urgent Priority"
+      sort_by_priority_as_asc_or_desc: "Sort by Priority"
       search_text: "Enter search text"
       search_button: "Search"
+      action: "Actions"
     new:
       new_task: "New Task"
       create_button: "Create"
