@@ -12,6 +12,12 @@ en:
       task_edit: "Edit"
       task_delete: "Delete"
       delete_confirm: "Are you sure to delete this task?"
+  views:
+    pagination:
+      first: "First"
+      previous: "Previous"
+      next: "Next"
+      last: "Last"
 
   tasks:
     index:

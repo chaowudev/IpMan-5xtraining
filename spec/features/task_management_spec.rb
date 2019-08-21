@@ -128,11 +128,10 @@ RSpec.feature "TaskManagements", type: :feature do
       before do
         chinese_task
         english_task
+        visit tasks_path
       end
       
-      scenario 'Can search by task title as Chinese' do
-        visit tasks_path
-        
+      scenario 'Can search by task title as Chinese' do  
         fill_in 'search', with: '中文'
         click_button 'Search'
 
@@ -140,9 +139,7 @@ RSpec.feature "TaskManagements", type: :feature do
         expect(page).to have_content chinese_task.title
       end
 
-      scenario 'Can search by task title as English and case insensitive' do
-        visit tasks_path
-        
+      scenario 'Can search by task title as English and case insensitive' do  
         fill_in 'search', with: 'ENGLISH'
         click_button 'Search'
 
@@ -150,9 +147,7 @@ RSpec.feature "TaskManagements", type: :feature do
         expect(page).to have_content english_task.title
       end
 
-      scenario 'Can search by task description as Chinese' do
-        visit tasks_path
-        
+      scenario 'Can search by task description as Chinese' do  
         fill_in 'search', with: '任務'
         click_button 'Search'
 
@@ -160,14 +155,52 @@ RSpec.feature "TaskManagements", type: :feature do
         expect(page).to have_content chinese_task.title
       end
 
-      scenario 'Can search by task description as English and case insensitive' do
-        visit tasks_path
-        
+      scenario 'Can search by task description as English and case insensitive' do  
         fill_in 'search', with: 'TASK'
         click_button 'Search'
 
         expect(page).to have_selector('.task-item', count: 2)
         expect(page).to have_content task.title, english_task.title
+      end
+    end
+
+    describe 'with single tasks' do
+      scenario 'does not paginate'  do
+        visit tasks_path
+        
+        expect(page).to have_selector('.task-item', count: 1)
+        expect(page).to have_no_selector('nav.pagination')
+      end
+    end
+    
+    describe 'with six tasks and maximum tasks per page set to 5' do
+      let(:test_task1) { create :task, title: 'test_task1' }
+      let(:test_task2) { create :task, title: 'test_task2' }
+      let(:test_task3) { create :task, title: 'test_task3' }
+      let(:test_task4) { create :task, title: 'test_task4' }
+      let(:last_task) { create :task, title: 'test pagination' }
+  
+      before do
+        test_task1
+        test_task2
+        test_task3
+        test_task4
+        last_task
+        visit tasks_path
+      end
+
+      scenario 'display 5 tasks in the first page' do
+        expect(page).to have_selector('nav.pagination')
+        expect(page).to have_selector('.task-item', count: 5)
+      end
+
+      scenario 'display 1 task in the second page' do
+        within 'nav.pagination' do
+          click_link '2'
+        end
+
+        expect(page).to have_current_path('/?page=2')
+        expect(page).to have_selector('.task-item', count: 1)
       end
     end
   end
