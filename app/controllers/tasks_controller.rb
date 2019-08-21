@@ -46,10 +46,8 @@ class TasksController < ApplicationController
   private
 
   def sort_with_type
-    case
-    when params[:direction] == nil then search
-    else priority_sort_direction
-    end
+    return search if params[:direction].blank?
+    priority_sort_direction
   end
 
   def search
@@ -66,7 +64,9 @@ class TasksController < ApplicationController
   end
 
   def priority_sort_direction
-    @tasks = params[:direction] == 'asc' ? Task.sort_priority_asc : Task.sort_priority_desc
+    direction = params[:direction] == 'desc' ? 'desc' : 'asc'
+    # after having pagination, delete limit method
+    @tasks = Task.sort_priority_by(direction).limit(20)
   end
 
   def options_content
