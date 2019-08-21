@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
   before_action :search, only: :index
+  before_action :sort_with_type, only: :index
 
   def index
   end
@@ -44,6 +45,13 @@ class TasksController < ApplicationController
   
   private
 
+  def sort_with_type
+    case
+    when params[:direction] == nil then search
+    else priority_sort_direction
+    end
+  end
+
   def search
     if params[:search]
       search_params = params[:search].downcase
@@ -56,7 +64,11 @@ class TasksController < ApplicationController
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
   end
-  
+
+  def priority_sort_direction
+    @tasks = params[:direction] == 'asc' ? Task.sort_priority_asc : Task.sort_priority_desc
+  end
+
   def options_content
     @statuses = Task.statuses.keys
     @emergency_levels = Task.emergency_levels.keys
