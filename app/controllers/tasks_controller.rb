@@ -15,10 +15,10 @@ class TasksController < ApplicationController
     @task = Task.new(task_permit_params)
     @task.user = User.first  # User 系統完成要移除
     if @task.save
-      redirect_to tasks_path, notice: t('controller.notice.create_success')
+      redirect_to tasks_path, notice: t('controller.notice.tasks.create_success')
     else
       # 待處理：如果不是重新整理的話，直接點選連結到下一頁，notice 還會再頁面上...
-      flash[:notice] = t('controller.notice.create_failure')
+      flash[:notice] = t('controller.notice.tasks.create_failure')
       render :new
     end
   end
@@ -31,16 +31,16 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_permit_params)
-      redirect_to task_path, notice: t('controller.notice.update_success')
+      redirect_to task_path, notice: t('controller.notice.tasks.update_success')
     else
-      flash[:notice] = t('controller.notice.update_failure')
+      flash[:notice] = t('controller.notice.tasks.update_failure')
       render :edit
     end
   end
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: t('controller.notice.delete_success')
+    redirect_to tasks_path, notice: t('controller.notice.tasks.delete_success')
   end
   
   private

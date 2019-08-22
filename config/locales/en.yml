@@ -12,7 +12,13 @@ en:
       task_edit: "Edit"
       task_delete: "Delete"
       delete_confirm: "Are you sure to delete this task?"
+    user:
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Password Confirmation"
   views:
+    navbar:
+      sign_up_button: "Sign Up"
     pagination:
       first: "First"
       previous: "Previous"
@@ -41,14 +47,25 @@ en:
       errors: "errors"
     show:
       show_title: "Task Details"
+  users:
+    new:
+      sign_up: "Sign Up"
+      sign_up_button: "Sign UP"
+      there_are: "There are "
+      error: "error"
+      errors: "errors"
 
   controller:
     notice:
-      create_success: "Create Successfully"
-      create_failure: "Create Failure"
-      update_success: "Update Successfully"
-      update_failure: "Update Failure"
-      delete_success: "Delete Successfully"
+      tasks:
+        create_success: "Create Successfully"
+        create_failure: "Create Failure"
+        update_success: "Update Successfully"
+        update_failure: "Update Failure"
+        delete_success: "Delete Successfully"
+      users:
+        create_success: "Welcome to Ip-Man"
+        create_failure: "Sign-up Failure"
       
   activerecord:
     attributes:
@@ -68,6 +85,10 @@ en:
           zero: "Unimportant"
           one: "Important"
           two: "Urgent"
+      user:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password"
 
     errors:
       models:
