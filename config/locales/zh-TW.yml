@@ -1,6 +1,8 @@
 "zh-TW":
   attributes:
     task:
+      one: '任務'
+      other: '任務'
       title: "標題"
       description: "任務描述"
       status: "狀態"
@@ -13,6 +15,8 @@
       task_delete: "刪除"
       delete_confirm: "確定要刪除此任務嗎？"
     user:
+      one: '使用者'
+      other: '使用者'
       email: "電子信箱"
       password: "密碼"
       password_confirmation: "確認密碼"
@@ -66,7 +70,7 @@
       users:
         create_success: "歡迎使用 Ip-Man"
         create_failure: "註冊失敗"
-      
+
   activerecord:
     attributes:
       task:

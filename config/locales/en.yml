@@ -1,6 +1,8 @@
 en:
   attributes:
     task:
+      one: 'task'
+      other: 'tasks'
       title: "Title"
       description: "Description"
       status: "Status"
@@ -13,6 +15,8 @@ en:
       task_delete: "Delete"
       delete_confirm: "Are you sure to delete this task?"
     user:
+      one: 'user'
+      other: 'users'
       email: "Email"
       password: "Password"
       password_confirmation: "Password Confirmation"
@@ -66,7 +70,7 @@ en:
       users:
         create_success: "Welcome to Ip-Man"
         create_failure: "Sign-up Failure"
-      
+
   activerecord:
     attributes:
       task:
