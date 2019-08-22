@@ -1,6 +1,8 @@
 "zh-TW":
   attributes:
     task:
+      one: "任務"
+      other: "任務"
       title: "標題"
       description: "任務描述"
       status: "狀態"
@@ -13,12 +15,16 @@
       task_delete: "刪除"
       delete_confirm: "確定要刪除此任務嗎？"
     user:
+      one: "使用者"
+      other: "使用者"
       email: "電子信箱"
       password: "密碼"
       password_confirmation: "確認密碼"
   views:
     navbar:
-      sign_up_button: "註冊"
+      signup_button: "註冊"
+      login_button: "登入"
+      logout_button: "登出"
     pagination:
       first: "第一頁"
       previous: "上一頁"
@@ -54,9 +60,15 @@
       there_are: "這裡有 "
       error: "個錯誤"
       errors: "個錯誤"
+  sessions:
+    new:
+      login_title: "會員登入"
+      login_button: "登入"
 
   controller:
     notice:
+      application:
+        authorize_before_signin: "需登入才能查看任務！"
       tasks:
         create_success: "新增任務成功"
         create_failure: "新增任務失敗"
@@ -66,6 +78,10 @@
       users:
         create_success: "歡迎使用 Ip-Man"
         create_failure: "註冊失敗"
+      sessions:
+        login_success: "登入成功"
+        login_failure: "登入失敗 電子信箱或密碼不正確"
+        logout_success: "登出成功"
       
   activerecord:
     attributes:

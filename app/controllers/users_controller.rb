@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_permit_params)
     if @user.save
-      redirect_to root_url, notice: t('controller.notice.users.create_success')
+      session[:user_id] = @user.id
+      redirect_to tasks_path, notice: t('controller.notice.users.create_success')
     else
       flash[:notice] = t('controller.notice.users.create_failure')
       render :new

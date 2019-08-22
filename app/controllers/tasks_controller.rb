@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :authorize_user
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
   before_action :search, only: :index
@@ -13,7 +14,7 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(task_permit_params)
-    @task.user = User.first  # User 系統完成要移除
+    @task.user = current_user
     if @task.save
       redirect_to tasks_path, notice: t('controller.notice.tasks.create_success')
     else
@@ -53,9 +54,9 @@ class TasksController < ApplicationController
   def search
     if params[:search]
       search_params = params[:search].downcase
-      @tasks = Task.search_title_and_description(search_params).page(params[:page]).per(5)
+      @tasks = current_user.tasks.search_title_and_description(search_params).page(params[:page]).per(5)
     else
-      @tasks = Task.sort_by_date(sort_column).page(params[:page]).per(5)
+      @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
     end
   end
 
@@ -64,7 +65,7 @@ class TasksController < ApplicationController
   end
 
   def priority_sort_direction
-    @tasks = Task.sort_priority_by(params[:direction]).page(params[:page]).per(5)
+    @tasks = current_user.tasks.sort_priority_by(params[:direction]).page(params[:page]).per(5)
   end
 
   def options_content
@@ -73,12 +74,10 @@ class TasksController < ApplicationController
   end
   
   def task_permit_params
-    # 等 user 功能建立起來，再看有沒有需要把 :user_id 放入 permit
     params.require(:task).permit(:title, :description, :status, :started_at, :deadline_at, :emergency_level)
   end
   
   def find_task
     @task = Task.find_by(id: params[:id])
   end
-  
 end
