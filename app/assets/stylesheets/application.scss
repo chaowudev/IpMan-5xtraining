@@ -1,0 +1,39 @@
+@import "bootstrap";
+
+// nav bar
+.navbar {
+  margin-bottom: 25px;
+  .navbar-nav a {
+    padding: 0 15px;
+  }
+  .navbar-nav a:hover {
+    color: white;
+  }
+}
+
+// task index-page
+#link-group-for-sorting {
+  margin: 15px 0;
+  .btn a:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+.pagination {
+  justify-content: center;
+}
+
+// task form-page
+.title-area .form-control{
+  width: 600px;
+  margin: 0 0 10px 0;
+}
+textarea.description-area {
+  height: 150px;
+  width: 600px;
+}
+
+// task new-page
+.task-index {
+  margin: 10px 0;
+}

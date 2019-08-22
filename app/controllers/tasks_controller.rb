@@ -64,7 +64,7 @@ class TasksController < ApplicationController
   end
 
   def priority_sort_direction
-    direction = params[:direction] == 'desc' ? 'desc' : 'asc'
+    direction = params[:direction] == 'asc' ? 'asc' : 'desc'
     @tasks = Task.sort_priority_by(direction).page(params[:page]).per(5)
   end
 

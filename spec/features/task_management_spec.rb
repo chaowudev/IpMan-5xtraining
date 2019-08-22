@@ -102,9 +102,10 @@ RSpec.feature "TaskManagements", type: :feature do
 
       scenario 'Has correct order by priority as asc' do
         visit tasks_path
-        click_link 'Unimportant Priorit'
+        click_link 'Sort by Priority'
 
         expect(page).to have_selector('.task-item', count: 3)
+        expect(page).to have_current_path('/?direction=asc&sort=emergency_level')
         expect(page_items[0]).to have_content task.title
         expect(page_items[1]).to have_content first_task.title
         expect(page_items[2]).to have_content second_task.title
@@ -112,9 +113,11 @@ RSpec.feature "TaskManagements", type: :feature do
 
       scenario 'Has correct order by priority as desc' do
         visit tasks_path
-        click_link 'Urgent Priority'
+        click_link 'Sort by Priority'
+        click_link 'Sort by Priority'
 
         expect(page).to have_selector('.task-item', count: 3)
+        expect(page).to have_current_path('/?direction=desc&sort=emergency_level')
         expect(page_items[0]).to have_content second_task.title
         expect(page_items[1]).to have_content first_task.title
         expect(page_items[2]).to have_content task.title
@@ -169,7 +172,7 @@ RSpec.feature "TaskManagements", type: :feature do
         visit tasks_path
         
         expect(page).to have_selector('.task-item', count: 1)
-        expect(page).to have_no_selector('nav.pagination')
+        expect(page).to have_no_selector('.pagination')
       end
     end
     
@@ -190,12 +193,12 @@ RSpec.feature "TaskManagements", type: :feature do
       end
 
       scenario 'display 5 tasks in the first page' do
-        expect(page).to have_selector('nav.pagination')
+        expect(page).to have_selector('.pagination')
         expect(page).to have_selector('.task-item', count: 5)
       end
 
       scenario 'display 1 task in the second page' do
-        within 'nav.pagination' do
+        within '.pagination' do
           click_link '2'
         end
 

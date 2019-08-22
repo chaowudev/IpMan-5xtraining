@@ -1,12 +1,12 @@
 "zh-TW":
   attributes:
     task:
-      title: "標題："
-      description: "任務描述："
-      status: "狀態："
-      started_at: "開始日期："
-      deadline_at: "結束日期："
-      emergency_level: "優先程度："
+      title: "標題"
+      description: "任務描述"
+      status: "狀態"
+      started_at: "開始日期"
+      deadline_at: "結束日期"
+      emergency_level: "優先程度"
       task_index: "任務列表"
       task_show: "查看細節"
       task_edit: "編輯"
@@ -26,10 +26,10 @@
       new_task: "新增任務"
       sort_by_created_date: "依建立日期排序"
       sort_by_deadline_date: "依結束日期排序"
-      sort_by_priority_as_asc: "依不重要程度排序"
-      sort_by_priority_as_desc: "依緊急程度排序"
+      sort_by_priority_as_asc_or_desc: "依緊急程度排序"
       search_text: "輸入文字搜尋"
       search_button: "搜尋"
+      action: "處理"
     new:
       new_task: "新增任務"
       create_button: "新增任務"
