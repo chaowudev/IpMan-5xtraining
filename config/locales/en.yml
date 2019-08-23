@@ -89,6 +89,7 @@ en:
     notice:
       application:
         authorize_before_signin: "Required Login to view tasks!"
+        authorize_is_admin: "Insufficient Permissions!"
       tasks:
         create_success: "Create Successfully"
         create_failure: "Create Failure"
