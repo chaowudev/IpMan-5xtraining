@@ -89,6 +89,7 @@
     notice:
       application:
         authorize_before_signin: "需登入才能查看任務！"
+        authorize_is_admin: "權限不足!"
       tasks:
         create_success: "新增任務成功"
         create_failure: "新增任務失敗"
