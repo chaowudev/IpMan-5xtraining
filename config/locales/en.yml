@@ -52,6 +52,8 @@ en:
       edit_title: "Edit Task"
       update_button: "Update"
     form:
+      tag: "Tags of Task"
+      tag_area_placeholder: "Tag-first, Tag-second, Tag-third"
       there_are: "There are "
       error: "error"
       errors: "errors"

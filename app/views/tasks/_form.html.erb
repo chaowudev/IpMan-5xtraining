@@ -25,6 +25,11 @@
     <%= f.label :deadline_at, t('attributes.task.deadline_at') %>
     <%= f.date_select :deadline_at, order: %i[year month day] %>
   </div>
+
+  <div class="tag-area">
+    <%= f.label :tag_list, t('.tag'), for: 'formGroupExampleInput' %>
+    <%= f.text_field :tag_list, id: 'formGroupExampleInput', class: 'form-control', placeholder: t('.tag_area_placeholder') %>    
+  </div>
   
   <div class="mb-3">
     <%= f.label :description, t('attributes.task.description'), for: 'validationTextarea' %>
