@@ -10,11 +10,26 @@
   </head>
 
   <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="navbar-nav">
+      <%= link_to 'English', locale: "en" %>
+      <%= link_to '中文', locale: "zh-TW" %>
+    </div>
+    <div class="navbar-nav">
+      <% if current_user %>
+        <%= current_user.email %>
+        <%= link_to t('views.navbar.logout_button'), session_path(:current_user), method: :delete %>
+        <%= link_to t('views.navbar.admin'), admin_users_path if current_user.admin? %>
+      <% else %>
+        <%= link_to t('views.navbar.signup_button'), new_user_path %>
+        <%= link_to t('views.navbar.login_button'), new_session_path %>
+      <% end %>
+    </div>
+  </nav>
 
-    <%= link_to '中文', locale: "zh-TW" %>
-    <%= link_to 'English', locale: "en" %>
-    
-    <%= notice %>
-    <%= yield %>
+    <div class="container">
+      <%= notice %>
+      <%= yield %>
+    </div>
   </body>
 </html>

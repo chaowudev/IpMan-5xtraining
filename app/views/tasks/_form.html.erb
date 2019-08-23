@@ -1,9 +1,9 @@
 <!-- 以區域變數做出彈性 -->
 <%= form_for task, url: { controller: :tasks, action: action }, html: { method: method } do |f| %>
 
-  <div>
-    <%= f.label :title, t('attributes.task.title') %>
-    <%= f.text_field :title, autofocus: true %>
+  <div class="title-area">
+    <%= f.label :title, t('attributes.task.title'), for: 'formGroupExampleInput' %>
+    <%= f.text_field :title, autofocus: true, id: 'formGroupExampleInput', class: 'form-control' %>
   </div>
 
   <div>
@@ -26,13 +26,13 @@
     <%= f.date_select :deadline_at, order: %i[year month day] %>
   </div>
   
-  <div>
-    <%= f.label :description, t('attributes.task.description') %>
-    <%= f.text_area :description %>
+  <div class="mb-3">
+    <%= f.label :description, t('attributes.task.description'), for: 'validationTextarea' %>
+    <%= f.text_area :description, class: 'form-control description-area', id: 'validationTextarea' %>
   </div>
 
   <div id="form-action">
-    <%= f.submit button %>
+    <%= f.submit button, class: 'btn btn-outline-success' %>
   </div>
 
 <% end %>

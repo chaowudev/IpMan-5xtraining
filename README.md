@@ -6,6 +6,11 @@
 - Ruby version: 2.6.0
 - Rails version: 5.2.3
 - PostgreSQL version: 11.3
+- Clone IpMan-5xtraining from GitHub: `$ git clone https://github.com/chaochaowu/IpMan-5xtraining.git`
+- Enter to IpMan-5xtraining: `$ cd IpMan-5xtraining`
+- `$ rails db:create`
+- `$ rails db:migrate`
+- `$ rails db:seed`
 
 ## Test Suit
 1. Install Google Chrome web-driver

@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature "TaskManagements", type: :feature do
-  # User need to sign in before task management
-  let(:user) { create :user }  # let 是懶惰方法
+  let(:user) { create :user }
   let(:last_task) { Task.last }
-  before { user }
+  before do
+    user
+    user_login(user.email, user.password)
+  end
   
   feature 'create task flow' do
     scenario 'User creates a new task' do
-      visit new_task_path
+      click_on 'New Task'
 
       fill_in 'task[title]', with: 'task test'
       find("option[value='to_do']", text: 'to_do').select_option
@@ -34,7 +36,7 @@ RSpec.feature "TaskManagements", type: :feature do
   end
   
   feature 'existence task flow' do
-    let(:task) { create :task }
+    let(:task) { create :task, user_id: user.id }
     before { task }
 
     scenario 'User reads task' do
@@ -45,7 +47,7 @@ RSpec.feature "TaskManagements", type: :feature do
     
     scenario 'User edits task' do
       visit tasks_path
-      click_link 'Edit'  # click_on = click_button or click_link
+      click_link 'Edit'
       fill_in 'task[description]', with: 'test task updating'
       click_button 'Update'
       
@@ -67,9 +69,8 @@ RSpec.feature "TaskManagements", type: :feature do
     end
 
     describe 'Sort task flow' do
-      let(:first_task) { create :task, title: 'first task', emergency_level: 1, deadline_at: '2019-08-19', created_at: '2019-08-17 04:00:00' }
-      let(:second_task) { create :task, title: 'second task', emergency_level: 2, deadline_at: '2019-08-18', created_at: '2019-08-17 06:00:00' }
-
+      let(:first_task) { create :task, user_id: user.id, title: 'first task', emergency_level: 1, deadline_at: '2019-08-19', created_at: '2019-08-17 04:00:00' }
+      let(:second_task) { create :task, user_id: user.id, title: 'second task', emergency_level: 2, deadline_at: '2019-08-18', created_at: '2019-08-17 06:00:00' }
       before do
         first_task
         second_task
@@ -102,9 +103,10 @@ RSpec.feature "TaskManagements", type: :feature do
 
       scenario 'Has correct order by priority as asc' do
         visit tasks_path
-        click_link 'Unimportant Priorit'
+        click_link 'Sort by Priority'
 
         expect(page).to have_selector('.task-item', count: 3)
+        expect(page).to have_current_path('/tasks?direction=asc&sort=emergency_level')
         expect(page_items[0]).to have_content task.title
         expect(page_items[1]).to have_content first_task.title
         expect(page_items[2]).to have_content second_task.title
@@ -112,9 +114,11 @@ RSpec.feature "TaskManagements", type: :feature do
 
       scenario 'Has correct order by priority as desc' do
         visit tasks_path
-        click_link 'Urgent Priority'
+        click_link 'Sort by Priority'
+        click_link 'Sort by Priority'
 
         expect(page).to have_selector('.task-item', count: 3)
+        expect(page).to have_current_path('/tasks?direction=desc&sort=emergency_level')
         expect(page_items[0]).to have_content second_task.title
         expect(page_items[1]).to have_content first_task.title
         expect(page_items[2]).to have_content task.title
@@ -122,17 +126,15 @@ RSpec.feature "TaskManagements", type: :feature do
     end
 
     describe 'Search task flow' do
-      let(:chinese_task) { create :task, title: '中文', description: '這是中文任務描述' }
-      let(:english_task) { create :task, title: 'English', description: 'THIS IS ENGLISH TASK' }
-
+      let(:chinese_task) { create :task, user_id: user.id, title: '中文', description: '這是中文任務描述' }
+      let(:english_task) { create :task, user_id: user.id, title: 'English', description: 'THIS IS ENGLISH TASK' }
       before do
         chinese_task
         english_task
+        visit tasks_path
       end
       
-      scenario 'Can search by task title as Chinese' do
-        visit tasks_path
-        
+      scenario 'Can search by task title as Chinese' do  
         fill_in 'search', with: '中文'
         click_button 'Search'
 
@@ -140,9 +142,7 @@ RSpec.feature "TaskManagements", type: :feature do
         expect(page).to have_content chinese_task.title
       end
 
-      scenario 'Can search by task title as English and case insensitive' do
-        visit tasks_path
-        
+      scenario 'Can search by task title as English and case insensitive' do  
         fill_in 'search', with: 'ENGLISH'
         click_button 'Search'
 
@@ -150,9 +150,7 @@ RSpec.feature "TaskManagements", type: :feature do
         expect(page).to have_content english_task.title
       end
 
-      scenario 'Can search by task description as Chinese' do
-        visit tasks_path
-        
+      scenario 'Can search by task description as Chinese' do  
         fill_in 'search', with: '任務'
         click_button 'Search'
 
@@ -160,14 +158,51 @@ RSpec.feature "TaskManagements", type: :feature do
         expect(page).to have_content chinese_task.title
       end
 
-      scenario 'Can search by task description as English and case insensitive' do
-        visit tasks_path
-        
+      scenario 'Can search by task description as English and case insensitive' do  
         fill_in 'search', with: 'TASK'
         click_button 'Search'
 
         expect(page).to have_selector('.task-item', count: 2)
         expect(page).to have_content task.title, english_task.title
+      end
+    end
+
+    describe 'with single tasks' do
+      scenario 'does not paginate'  do
+        visit tasks_path
+        
+        expect(page).to have_selector('.task-item', count: 1)
+        expect(page).to have_no_selector('.pagination')
+      end
+    end
+    
+    describe 'with six tasks and maximum tasks per page set to 5' do
+      let(:test_task1) { create :task, user_id: user.id, title: 'test_task1' }
+      let(:test_task2) { create :task, user_id: user.id, title: 'test_task2' }
+      let(:test_task3) { create :task, user_id: user.id, title: 'test_task3' }
+      let(:test_task4) { create :task, user_id: user.id, title: 'test_task4' }
+      let(:last_task) { create :task, user_id: user.id, title: 'test pagination' }
+      before do
+        test_task1
+        test_task2
+        test_task3
+        test_task4
+        last_task
+        visit tasks_path
+      end
+
+      scenario 'display 5 tasks in the first page' do
+        expect(page).to have_selector('.pagination')
+        expect(page).to have_selector('.task-item', count: 5)
+      end
+
+      scenario 'display 1 task in the second page' do
+        within '.pagination' do
+          click_link '2'
+        end
+
+        expect(page).to have_current_path('/tasks?page=2')
+        expect(page).to have_selector('.task-item', count: 1)
       end
     end
   end
@@ -189,5 +224,12 @@ RSpec.feature "TaskManagements", type: :feature do
     expect(items[0]).to have_content task.title
     expect(items[1]).to have_content first_task.title
     expect(items[2]).to have_content second_task.title
+  end
+
+  def user_login(email, password)
+    visit new_session_path
+    fill_in 'email', with: email
+    fill_in 'password', with: password
+    click_button 'Log In'
   end
 end

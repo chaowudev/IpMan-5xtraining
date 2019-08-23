@@ -1,17 +1,39 @@
 "zh-TW":
   attributes:
     task:
-      title: "標題："
-      description: "任務描述："
-      status: "狀態："
-      started_at: "開始日期："
-      deadline_at: "結束日期："
-      emergency_level: "優先程度："
+      one: "任務"
+      other: "任務"
+      title: "標題"
+      description: "任務描述"
+      status: "狀態"
+      started_at: "開始日期"
+      deadline_at: "結束日期"
+      emergency_level: "優先程度"
       task_index: "任務列表"
       task_show: "查看細節"
       task_edit: "編輯"
       task_delete: "刪除"
       delete_confirm: "確定要刪除此任務嗎？"
+      count: "任務數量"
+    user:
+      one: "使用者"
+      other: "使用者"
+      email: "電子信箱"
+      password: "密碼"
+      password_confirmation: "確認密碼"
+      role: "角色"
+      delete_confirm: "確定要刪除此使用者嗎？"
+  views:
+    navbar:
+      signup_button: "註冊"
+      login_button: "登入"
+      logout_button: "登出"
+      admin: "後台管理"
+    pagination:
+      first: "第一頁"
+      previous: "上一頁"
+      next: "下一頁"
+      last: "最後一頁"
 
   tasks:
     index:
@@ -19,10 +41,10 @@
       new_task: "新增任務"
       sort_by_created_date: "依建立日期排序"
       sort_by_deadline_date: "依結束日期排序"
-      sort_by_priority_as_asc: "依不重要程度排序"
-      sort_by_priority_as_desc: "依緊急程度排序"
+      sort_by_priority_as_asc_or_desc: "依緊急程度排序"
       search_text: "輸入文字搜尋"
       search_button: "搜尋"
+      action: "處理"
     new:
       new_task: "新增任務"
       create_button: "新增任務"
@@ -35,14 +57,58 @@
       errors: "個錯誤"
     show:
       show_title: "任務細節"
+  users:
+    new:
+      sign_up: "會員註冊"
+      sign_up_button: "註冊"
+      there_are: "這裡有 "
+      error: "個錯誤"
+      errors: "個錯誤"
+  sessions:
+    new:
+      login_title: "會員登入"
+      login_button: "登入"
+  admin:
+    users:
+      index:
+        admin_title: "後台管理"
+        new_user: "新增使用者"
+        action: "處理"
+        show_tasks_of_user: "查看使用者任務"
+      new:
+        new_user_title: "新增使用者"
+        create_button: "新增使用者"
+      edit:
+        edit_user_title: "編輯使用者"
+        update_password: "新密碼"
+        update_button: "更新使用者"
+      show:
+        show_title: " <任務列表>"
 
   controller:
     notice:
-      create_success: "新增任務成功"
-      create_failure: "新增任務失敗"
-      update_success: "更新任務成功"
-      update_failure: "更新任務失敗"
-      delete_success: "刪除任務成功"
+      application:
+        authorize_before_signin: "需登入才能查看任務！"
+        authorize_is_admin: "權限不足!"
+      tasks:
+        create_success: "新增任務成功"
+        create_failure: "新增任務失敗"
+        update_success: "更新任務成功"
+        update_failure: "更新任務失敗"
+        delete_success: "刪除任務成功"
+      users:
+        create_success: "歡迎使用 Ip-Man"
+        create_failure: "註冊失敗"
+      sessions:
+        login_success: "登入成功"
+        login_failure: "登入失敗 電子信箱或密碼不正確"
+        logout_success: "登出成功"
+      admin:
+        create_success: "成功新增使用者"
+        create_failure: "新增使用者失敗"
+        update_success: "更新使用者成功"
+        update_failure: "更新使用者失敗"
+        delete_success: "刪除使用者成功"
       
   activerecord:
     attributes:
@@ -62,6 +128,10 @@
           zero: "不重要"
           one: "重要"
           two: "緊急"
+      user:
+        email: "電子信箱"
+        password: "密碼"
+        password_confirmation: "密碼"
 
     errors:
       models:

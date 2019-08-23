@@ -1,17 +1,39 @@
 en:
   attributes:
     task:
-      title: "Title:"
-      description: "Description:"
-      status: "Status:"
-      started_at: "Start Date:"
-      deadline_at: "Deadline Date:"
-      emergency_level: "Priority:"
+      one: "task"
+      other: "tasks"
+      title: "Title"
+      description: "Description"
+      status: "Status"
+      started_at: "Start Date"
+      deadline_at: "Deadline Date"
+      emergency_level: "Priority"
       task_index: "Task Index"
       task_show: "Show Details"
       task_edit: "Edit"
       task_delete: "Delete"
       delete_confirm: "Are you sure to delete this task?"
+      count: "Task Counts"
+    user:
+      one: "user"
+      other: "users"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Password Confirmation"
+      role: "Role"
+      delete_confirm: "Are you sure to delete this user?"
+  views:
+    navbar:
+      signup_button: "Sign Up"
+      login_button: "Log In"
+      logout_button: "Log Out"
+      admin: "Backend Management"
+    pagination:
+      first: "First"
+      previous: "Previous"
+      next: "Next"
+      last: "Last"
 
   tasks:
     index:
@@ -19,10 +41,10 @@ en:
       new_task: "New Task"
       sort_by_created_date: "Created Date"
       sort_by_deadline_date: "Deadline Date"
-      sort_by_priority_as_asc: "Unimportant Priority"
-      sort_by_priority_as_desc: "Urgent Priority"
+      sort_by_priority_as_asc_or_desc: "Sort by Priority"
       search_text: "Enter search text"
       search_button: "Search"
+      action: "Actions"
     new:
       new_task: "New Task"
       create_button: "Create"
@@ -35,15 +57,59 @@ en:
       errors: "errors"
     show:
       show_title: "Task Details"
+  users:
+    new:
+      sign_up: "Sign Up"
+      sign_up_button: "Sign UP"
+      there_are: "There are "
+      error: "error"
+      errors: "errors"
+  sessions:
+    new:
+      login_title: "Log In"
+      login_button: "Log In"
+  admin:
+    users:
+      index:
+        admin_title: "Backend Management"
+        new_user: "New User"
+        action: "Actions"
+        show_tasks_of_user: "Show Tasks"
+      new:
+        new_user_title: "Create User"
+        create_button: "Create User"
+      edit:
+        edit_user_title: "Edit User"
+        update_password: "New password"
+        update_button: "Update User"
+      show:
+        show_title: " <Task Index>"
 
   controller:
     notice:
-      create_success: "Create Successfully"
-      create_failure: "Create Failure"
-      update_success: "Update Successfully"
-      update_failure: "Update Failure"
-      delete_success: "Delete Successfully"
-      
+      application:
+        authorize_before_signin: "Required Login to view tasks!"
+        authorize_is_admin: "Insufficient Permissions!"
+      tasks:
+        create_success: "Create Successfully"
+        create_failure: "Create Failure"
+        update_success: "Update Successfully"
+        update_failure: "Update Failure"
+        delete_success: "Delete Successfully"
+      users:
+        create_success: "Welcome to Ip-Man"
+        create_failure: "Sign-up Failure"
+      sessions:
+        login_success: "Sign-in Successfully"
+        login_failure: "Email or password is invalid"
+        logout_success: "Sign-out Successfully"
+      admin:
+        create_success: "Create User Successfully"
+        create_failure: "Create User Failure"
+        update_success: "Update User Successfully"
+        update_failure: "Update User Failure"
+        delete_success: "Delete User Successfully"
+
   activerecord:
     attributes:
       task:
@@ -62,6 +128,10 @@ en:
           zero: "Unimportant"
           one: "Important"
           two: "Urgent"
+      user:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password"
 
     errors:
       models:

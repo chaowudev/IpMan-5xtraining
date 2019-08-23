@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
-  # 暫時把任務列表設為根目錄
-  root 'tasks#index'
 
+  root 'sessions#new'
+
+  resources :users, only: %i[new create]
+  resources :sessions, only: %i[new create destroy]
   resources :tasks
+  
+  namespace :admin, path: 'IpMan2019-admin' do
+    resources :users
+  end
+  # get '/sign-up', to: 'users#new'
+  # get '/log-in', to: 'sessions#new'
+  # get '/log-out', to: 'sessions#destroy'
 
 end

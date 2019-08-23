@@ -1,27 +1,51 @@
 <h1><%= t('.index_title') %></h1>
 
-<%= link_to t('.new_task'), new_task_path %>
+<%= link_to t('.new_task'), new_task_path, class: 'btn btn-primary', role: 'button' %>
 
-<div>
-  <%= link_to_with_sort t('.sort_by_created_date'), :created_at %>
-  <%= link_to_with_sort t('.sort_by_deadline_date'), :deadline_at %>
-  <%= link_to_with_sort_as_asc t('.sort_by_priority_as_asc'), :emergency_level %>
-  <%= link_to_with_sort_as_desc t('.sort_by_priority_as_desc'), :emergency_level %>
+<div class="btn-group btn-group-toggle" data-toggle="buttons" id="link-group-for-sorting">
+  <div class="btn btn-outline-primary"><%= link_to_with_sort t('.sort_by_created_date'), :created_at %></div>
+  <div class="btn btn-outline-primary"><%= link_to_with_sort t('.sort_by_deadline_date'), :deadline_at %></div>
+  <div class="btn btn-outline-primary"><%= link_to_with_sort_as_asc_or_desc t('.sort_by_priority_as_asc_or_desc'), :emergency_level %></div>
 </div>
 
 <%= form_tag tasks_path, method: :get do %>
-  <%= text_field_tag :search, params[:search], placeholder: t('.search_text') %>
-  <%= submit_tag t('.search_button'), name: nil %>
+  <div class="input-group mb-3">
+    <%= text_field_tag :search, params[:search], placeholder: t('.search_text'), class: 'form-control' %>
+    <div class="input-group-append">
+      <%= submit_tag t('.search_button'), name: nil, class: 'btn btn-outline-secondary' %>
+    </div>
+  </div>
 <% end %>
 
-<% @tasks.each.with_index do |task, index| %>
-  <ul class="task-item">
-    <li><p>(<%= index + 1 %>)<%= t('attributes.task.title') %> <%= task.title %></p></li>
-    <!-- 之後 nav-bar 有狀態頁籤後記得把 status 拿掉 -->
-    <li><p><%= t('attributes.task.status') %><%= task.status %> (<%= task.emergency_level %>)</p></li>
-    <li><p><%= t('attributes.task.deadline_at') %><%= task.deadline_at %></p></li>
-  </ul>
-  <%= link_to t('attributes.task.task_show'), task_path(task) %>
-  <%= link_to t('attributes.task.task_edit'), edit_task_path(task) %>
-  <%= link_to t('attributes.task.task_delete'), task, method: :delete, data: { confirm: t('attributes.task.delete_confirm') } %>
-<% end %>
+<table class="table table-hover">
+  <thead class="bg-warning">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"><%= t('attributes.task.title') %></th>
+      <th scope="col"><%= t('attributes.task.status') %></th>
+      <th scope="col"><%= t('attributes.task.emergency_level') %></th>
+      <th scope="col"><%= t('attributes.task.started_at') %></th>
+      <th scope="col"><%= t('attributes.task.deadline_at') %></th>
+      <th scope="col"><%= t('.action') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each.with_index do |task, index| %>
+      <tr class="task-item">
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= task.title %></td>
+        <td><%= task.status %></td>
+        <td><%= task.emergency_level %></td>
+        <td><%= task.started_at %></td>
+        <td><%= task.deadline_at %></td>
+        <td>
+          <%= link_to t('attributes.task.task_show'), task_path(task), class: 'btn btn-outline-success', type: 'button' %>
+          <%= link_to t('attributes.task.task_edit'), edit_task_path(task), class: 'btn btn-outline-info', type: 'button' %>
+          <%= link_to t('attributes.task.task_delete'), task_path(task), method: :delete, data: { confirm: t('attributes.task.delete_confirm') }, class: 'btn btn-outline-danger', type: 'button' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @tasks %>

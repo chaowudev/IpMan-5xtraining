@@ -1,0 +1,40 @@
+<h1><%= t('.new_user_title') %></h1>
+
+<%= form_for @user, url: { controller: :'admin/users', action: :create }, html: { method: :post } do |f| %>
+  <div>
+    <%= f.label :email, t('attributes.user.email') %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password, t('attributes.user.password') %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, t('attributes.user.password_confirmation') %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= f.label :role, t('attributes.user.role') %>
+    <%= f.select :role, options_for_select(@roles) %>
+  </div>
+
+  <div>
+    <%= f.submit t('.create_button') %>
+  </div>
+<% end %>
+
+<% if @user.errors.any? %>
+  <div class="errors-explanation">
+    <div class="alert-error">
+      <p><%= t('users.new.there_are') %><%= pluralize @user.errors.count, t('users.new.error'), plural: t('users.new.errors') %></p>
+    </div>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

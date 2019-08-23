@@ -1,0 +1,35 @@
+<h1><%= t('.sign_up') %></h1>
+
+<%= form_for @user do |f| %>
+  <div>
+    <%= f.label :email, t('attributes.user.email') %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password, t('attributes.user.password') %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, t('attributes.user.password_confirmation') %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= f.submit t('.sign_up_button') %>
+  </div>
+<% end %>
+
+<% if @user.errors.any? %>
+  <div class="errors-explanation">
+    <div class="alert-error">
+      <p><%= t('.there_are') %><%= pluralize @user.errors.count, t('.error'), plural: t('.errors') %></p>
+    </div>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
