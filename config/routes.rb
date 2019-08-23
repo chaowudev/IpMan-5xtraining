@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'sessions#new'
 
   resources :users, only: %i[new create]
@@ -16,5 +15,4 @@ Rails.application.routes.draw do
   %w[404 500].each do |code|
     get code, to: "errors#show", code: code
   end
-
 end
