@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   # get '/log-in', to: 'sessions#new'
   # get '/log-out', to: 'sessions#destroy'
 
+  %w[404 500].each do |code|
+    get code, to: "errors#show", code: code
+  end
+
 end
