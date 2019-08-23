@@ -11,7 +11,8 @@ class Task < ApplicationRecord
   validates :user_id, :title, :status, :started_at, :deadline_at, :emergency_level, presence: true
 
   # search logic
-  scope :search_title_and_description, -> (search_params) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%") }
+  scope :search_title_or_description_with, -> (search_params) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%") }
+  # scope :search_tagged_with, -> (tag_name) { find_by!(name: tag_name).tasks }
 
   # sort task logic
   scope :sort_by_date, -> (created_date_or_deadline_date) { order(created_date_or_deadline_date) }
@@ -21,4 +22,13 @@ class Task < ApplicationRecord
   #   errors.add(:deadline_at, I18n.t('activerecord.errors.messages.incorrect_deadline')) if deadline_at < started_at
   # end
 
+  def tag_list
+    tags.map(&:name).join(', ')
+  end
+
+  def tag_list=(names)
+    self.tags = names.split(',').map do |item|
+      Tag.where(name: item.strip).first_or_create!
+    end
+  end
 end

@@ -53,7 +53,7 @@ class TasksController < ApplicationController
   def search
     if params[:search]
       search_params = params[:search].downcase
-      @tasks = current_user.tasks.search_title_and_description(search_params).page(params[:page]).per(5)
+      @tasks = current_user.tasks.search_title_or_description_with(search_params).page(params[:page]).per(5)
     else
       @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
     end
@@ -74,7 +74,7 @@ class TasksController < ApplicationController
   end
   
   def task_permit_params
-    params.require(:task).permit(:title, :description, :status, :started_at, :deadline_at, :emergency_level)
+    params.require(:task).permit(:title, :description, :status, :started_at, :deadline_at, :emergency_level, :tag_list)
   end
   
   def find_task

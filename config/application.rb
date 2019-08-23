@@ -27,5 +27,7 @@ module IpMan5xtraining
 
     # default lacale when translation missing
     config.i18n.fallbacks = true
+
+    config.exceptions_app = self.routes
   end
 end

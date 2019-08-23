@@ -52,6 +52,8 @@ en:
       edit_title: "Edit Task"
       update_button: "Update"
     form:
+      tag: "Tags of Task"
+      tag_area_placeholder: "Tag-first, Tag-second, Tag-third"
       there_are: "There are "
       error: "error"
       errors: "errors"
@@ -84,6 +86,9 @@ en:
         update_button: "Update User"
       show:
         show_title: " <Task Index>"
+  errors:
+    error_404: "I can't help you with your needs..."
+    error_500: "Oops! Would you like to try again later?"
 
   controller:
     notice:

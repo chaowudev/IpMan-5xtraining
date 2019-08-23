@@ -52,6 +52,8 @@
       edit_title: "編輯任務"
       update_button: "更新任務"
     form:
+      tag: "任務標籤"
+      tag_area_placeholder: "標籤一, 標籤二, 標籤三"
       there_are: "這裡有 "
       error: "個錯誤"
       errors: "個錯誤"
@@ -84,6 +86,9 @@
         update_button: "更新使用者"
       show:
         show_title: " <任務列表>"
+  errors:
+    error_404: "你的需求我沒辦法幫你..."
+    error_500: "Oops! 你要不要稍後再試試看？"
 
   controller:
     notice:
