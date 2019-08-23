@@ -1,0 +1,31 @@
+<h1><%= t('.admin_title') %></h1>
+<%= link_to t('.new_user'), new_admin_user_path, class: 'btn btn-primary', role: 'button' %>
+
+<table class="table table-hover">
+  <thead class="bg-warning">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"><%= t('attributes.user.email') %></th>
+      <th scope="col"><%= t('attributes.user.role') %></th>
+      <th scope="col"><%= t('attributes.task.count') %></th>
+      <th scope="col"><%= t('.action') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each.with_index do |user, index| %>
+      <tr class="user-item">
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td><%= user.tasks_count %></td>
+        <td>
+          <%= link_to t('.show_tasks_of_user'), admin_user_path(user), class: 'btn btn-outline-success', type: 'button' %>
+          <%= link_to t('attributes.task.task_edit'), edit_admin_user_path(user), class: 'btn btn-outline-info', type: 'button' %>
+          <%= link_to t('attributes.task.task_delete'), admin_user_path(user), method: :delete, data: { confirm: t('attributes.user.delete_confirm') }, class: 'btn btn-outline-danger', type: 'button' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @users %>

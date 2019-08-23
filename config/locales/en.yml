@@ -14,17 +14,21 @@ en:
       task_edit: "Edit"
       task_delete: "Delete"
       delete_confirm: "Are you sure to delete this task?"
+      count: "Task Counts"
     user:
       one: "user"
       other: "users"
       email: "Email"
       password: "Password"
       password_confirmation: "Password Confirmation"
+      role: "Role"
+      delete_confirm: "Are you sure to delete this user?"
   views:
     navbar:
       signup_button: "Sign Up"
       login_button: "Log In"
       logout_button: "Log Out"
+      admin: "Backend Management"
     pagination:
       first: "First"
       previous: "Previous"
@@ -64,6 +68,22 @@ en:
     new:
       login_title: "Log In"
       login_button: "Log In"
+  admin:
+    users:
+      index:
+        admin_title: "Backend Management"
+        new_user: "New User"
+        action: "Actions"
+        show_tasks_of_user: "Show Tasks"
+      new:
+        new_user_title: "Create User"
+        create_button: "Create User"
+      edit:
+        edit_user_title: "Edit User"
+        update_password: "New password"
+        update_button: "Update User"
+      show:
+        show_title: " <Task Index>"
 
   controller:
     notice:
@@ -82,7 +102,13 @@ en:
         login_success: "Sign-in Successfully"
         login_failure: "Email or password is invalid"
         logout_success: "Sign-out Successfully"
-      
+      admin:
+        create_success: "Create User Successfully"
+        create_failure: "Create User Failure"
+        update_success: "Update User Successfully"
+        update_failure: "Update User Failure"
+        delete_success: "Delete User Successfully"
+        
   activerecord:
     attributes:
       task:

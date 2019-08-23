@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :authorize_user
+  before_action :request_login
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
   before_action :search, only: :index

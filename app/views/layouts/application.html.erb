@@ -19,6 +19,7 @@
       <% if current_user %>
         <%= current_user.email %>
         <%= link_to t('views.navbar.logout_button'), session_path(:current_user), method: :delete %>
+        <%= link_to t('views.navbar.admin'), admin_users_path %>
       <% else %>
         <%= link_to t('views.navbar.signup_button'), new_user_path %>
         <%= link_to t('views.navbar.login_button'), new_session_path %>
