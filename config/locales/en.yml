@@ -1,6 +1,8 @@
 en:
   attributes:
     task:
+      one: "task"
+      other: "tasks"
       title: "Title"
       description: "Description"
       status: "Status"
@@ -12,7 +14,17 @@ en:
       task_edit: "Edit"
       task_delete: "Delete"
       delete_confirm: "Are you sure to delete this task?"
+    user:
+      one: "user"
+      other: "users"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Password Confirmation"
   views:
+    navbar:
+      signup_button: "Sign Up"
+      login_button: "Log In"
+      logout_button: "Log Out"
     pagination:
       first: "First"
       previous: "Previous"
@@ -41,14 +53,35 @@ en:
       errors: "errors"
     show:
       show_title: "Task Details"
+  users:
+    new:
+      sign_up: "Sign Up"
+      sign_up_button: "Sign UP"
+      there_are: "There are "
+      error: "error"
+      errors: "errors"
+  sessions:
+    new:
+      login_title: "Log In"
+      login_button: "Log In"
 
   controller:
     notice:
-      create_success: "Create Successfully"
-      create_failure: "Create Failure"
-      update_success: "Update Successfully"
-      update_failure: "Update Failure"
-      delete_success: "Delete Successfully"
+      application:
+        authorize_before_signin: "Required Login to view tasks!"
+      tasks:
+        create_success: "Create Successfully"
+        create_failure: "Create Failure"
+        update_success: "Update Successfully"
+        update_failure: "Update Failure"
+        delete_success: "Delete Successfully"
+      users:
+        create_success: "Welcome to Ip-Man"
+        create_failure: "Sign-up Failure"
+      sessions:
+        login_success: "Sign-in Successfully"
+        login_failure: "Email or password is invalid"
+        logout_success: "Sign-out Successfully"
       
   activerecord:
     attributes:
@@ -68,6 +101,10 @@ en:
           zero: "Unimportant"
           one: "Important"
           two: "Urgent"
+      user:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password"
 
     errors:
       models:
