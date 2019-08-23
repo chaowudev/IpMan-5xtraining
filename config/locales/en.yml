@@ -108,7 +108,7 @@ en:
         update_success: "Update User Successfully"
         update_failure: "Update User Failure"
         delete_success: "Delete User Successfully"
-      
+        
   activerecord:
     attributes:
       task:
