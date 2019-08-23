@@ -20,11 +20,14 @@
       email: "電子信箱"
       password: "密碼"
       password_confirmation: "確認密碼"
+      role: "角色"
+      delete_confirm: "確定要刪除此使用者嗎？"
   views:
     navbar:
       signup_button: "註冊"
       login_button: "登入"
       logout_button: "登出"
+      admin: "後台管理"
     pagination:
       first: "第一頁"
       previous: "上一頁"
@@ -64,6 +67,20 @@
     new:
       login_title: "會員登入"
       login_button: "登入"
+  admin:
+    users:
+      index:
+        admin_title: "後台管理"
+        new_user: "新增使用者"
+        action: "處理"
+        show_tasks_of_user: "查看使用者任務"
+      new:
+        new_user_title: "新增使用者"
+        create_button: "新增使用者"
+      edit:
+        edit_user_title: "編輯使用者"
+        update_password: "新密碼"
+        update_button: "更新使用者"
 
   controller:
     notice:
@@ -82,6 +99,12 @@
         login_success: "登入成功"
         login_failure: "登入失敗 電子信箱或密碼不正確"
         logout_success: "登出成功"
+      admin:
+        create_success: "成功新增使用者"
+        create_failure: "新增使用者失敗"
+        update_success: "更新使用者成功"
+        update_failure: "更新使用者失敗"
+        delete_success: "刪除使用者成功"
       
   activerecord:
     attributes:
