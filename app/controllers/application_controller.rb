@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_path, notice: t('controller.notice.application.authorize_before_signin') if current_user.nil?
   end
 
+  def authorize_role
+    redirect_to tasks_path, notice: t('controller.notice.application.authorize_is_admin') if current_user.role == 'user'
+  end
+
 end

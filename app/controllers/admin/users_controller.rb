@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :request_login
+  before_action :authorize_role
   before_action :find_user, only: %i[show edit update destroy]
   before_action :options_content, only: %i[new create edit update]
 

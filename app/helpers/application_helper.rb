@@ -7,4 +7,8 @@ module ApplicationHelper
     direction = params[:direction] == 'asc' ? 'desc' : 'asc'
     link_to name, sort: table_column, direction: direction
   end
+
+  def is_admin?
+    current_user.role == 'admin'
+  end
 end
