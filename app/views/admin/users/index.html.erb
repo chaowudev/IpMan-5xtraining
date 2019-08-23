@@ -7,6 +7,7 @@
       <th scope="col"></th>
       <th scope="col"><%= t('attributes.user.email') %></th>
       <th scope="col"><%= t('attributes.user.role') %></th>
+      <th scope="col"><%= t('attributes.task.count') %></th>
       <th scope="col"><%= t('.action') %></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <th scope="row"><%= index + 1 %></th>
         <td><%= user.email %></td>
         <td><%= user.role %></td>
+        <td><%= user.tasks_count %></td>
         <td>
           <%= link_to t('.show_tasks_of_user'), admin_user_path(user), class: 'btn btn-outline-success', type: 'button' %>
           <%= link_to t('attributes.task.task_edit'), edit_admin_user_path(user), class: 'btn btn-outline-info', type: 'button' %>

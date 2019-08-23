@@ -14,6 +14,7 @@
       task_edit: "編輯"
       task_delete: "刪除"
       delete_confirm: "確定要刪除此任務嗎？"
+      count: "任務數量"
     user:
       one: "使用者"
       other: "使用者"

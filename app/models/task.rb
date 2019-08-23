@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
   # validate :starte_time_later_than_deadline
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :tag_tasks, dependent: :destroy  # 在刪除任務的時候，會把相關的 tag 紀錄也一併刪除
   has_many :tags, through: :tag_tasks
 
