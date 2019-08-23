@@ -82,6 +82,8 @@ en:
         edit_user_title: "Edit User"
         update_password: "New password"
         update_button: "Update User"
+      show:
+        show_title: " <Task Index>"
 
   controller:
     notice:

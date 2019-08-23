@@ -1,0 +1,30 @@
+<h1><%= @user.email %><%= t('.show_title') %></h1>
+
+<table class="table table-hover">
+  <thead class="bg-warning">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"><%= t('attributes.task.title') %></th>
+      <th scope="col"><%= t('attributes.task.status') %></th>
+      <th scope="col"><%= t('attributes.task.emergency_level') %></th>
+      <th scope="col"><%= t('attributes.task.started_at') %></th>
+      <th scope="col"><%= t('attributes.task.deadline_at') %></th>
+      <th scope="col"><%= t('attributes.task.description') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each.with_index do |task, index| %>
+      <tr class="task-item">
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= task.title %></td>
+        <td><%= task.status %></td>
+        <td><%= task.emergency_level %></td>
+        <td><%= task.started_at %></td>
+        <td><%= task.deadline_at %></td>
+        <td><%= task.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @tasks %>

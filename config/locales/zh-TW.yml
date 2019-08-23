@@ -82,6 +82,8 @@
         edit_user_title: "編輯使用者"
         update_password: "新密碼"
         update_button: "更新使用者"
+      show:
+        show_title: " <任務列表>"
 
   controller:
     notice:
