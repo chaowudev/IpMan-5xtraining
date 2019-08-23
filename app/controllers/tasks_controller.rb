@@ -13,8 +13,7 @@ class TasksController < ApplicationController
   end
   
   def create
-    @task = Task.new(task_permit_params)
-    @task.user = current_user
+    @task = current_user.tasks.new(task_permit_params)
     if @task.save
       redirect_to tasks_path, notice: t('controller.notice.tasks.create_success')
     else
