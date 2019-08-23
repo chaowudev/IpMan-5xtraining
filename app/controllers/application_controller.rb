@@ -22,5 +22,4 @@ class ApplicationController < ActionController::Base
   def authorize_role
     redirect_to tasks_path, notice: t('controller.notice.application.authorize_is_admin') if current_user.role == 'user'
   end
-
 end
