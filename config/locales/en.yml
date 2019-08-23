@@ -86,6 +86,9 @@ en:
         update_button: "Update User"
       show:
         show_title: " <Task Index>"
+  errors:
+    error_404: "I can't help you with your needs..."
+    error_500: "Oops! Would you like to try again later?"
 
   controller:
     notice:
