@@ -18,8 +18,10 @@
 <% end %>
 
 <div>
-  <%= label_tag :status, '依狀態搜尋' %>
-  <%= select_tag :status, options_for_select([["to_do", "to_do"], ["doing", "doing"], ["done", "done"], ["achive", "achive"]]) %>
+  <%= form_tag tasks_path, method: :get do %>
+    <%= label_tag :status, 'Select Status' %>
+    <%= select_tag :status, options_for_select([["to_do", "to_do"], ["doing", "doing"], ["done", "done"], ["achive", "achive"]], params[:status]) %>
+  <% end %>
 </div>
 
 <table class="table table-hover">

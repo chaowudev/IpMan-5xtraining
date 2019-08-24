@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: %i[show edit update destroy]
   before_action :search, only: :index
   before_action :sort_with_type, only: :index
-  # before_action :select_status_with, only: :index
+  before_action :select_status_with, only: :index
 
   def index
   end
@@ -62,16 +62,16 @@ class TasksController < ApplicationController
 
   def select_status_with
     case
-    when params[:status] == 'to_do'
-      @tasks = current_user.tasks.find_by(status: 'to_do')
-    when params[:status] == 'doing'
-      @tasks = current_user.tasks.find_by(status: 'doing')
-    when params[:status] == 'done'
-      @tasks = current_user.tasks.find_by(status: 'done')
-    when params[:status] == 'achive'
-      @tasks = current_user.tasks.find_by(status: 'achive')
+    when params[:status] == 'to_do' && params[:search] == ''
+      @tasks = current_user.tasks.where(status: 'to_do').page(params[:page]).per(5)
+    when params[:status] == 'doing' && params[:search] == ''
+      @tasks = current_user.tasks.where(status: 'doing').page(params[:page]).per(5)
+    when params[:status] == 'done' && params[:search] == ''
+      @tasks = current_user.tasks.where(status: 'done').page(params[:page]).per(5)
+    when params[:status] == 'achive' && params[:search] == ''
+      @tasks = current_user.tasks.where(status: 'achive').page(params[:page]).per(5)
     else
-      @tasks = current_user.tasks.sort_by_date(sort_column)
+      @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
     end
   end
 
