@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
   before_action :search, only: :index
+  before_action :select_status_with, only: :index
   before_action :sort_with_type, only: :index
 
   def index
@@ -57,6 +58,27 @@ class TasksController < ApplicationController
     else
       @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
     end
+  end
+
+  def select_status_with
+    status = params[:status]&.to_sym
+    if params[:search].blank? && status.in?(Task.statuses.keys)
+      @tasks = current_user.tasks.try(status).page(params[:page]).per(5)
+    else
+      @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
+    end
+    # case
+    # when params[:status] == 'to_do' && params[:search] == ''
+    #   @tasks = current_user.tasks.where(status: 'to_do').page(params[:page]).per(5)
+    # when params[:status] == 'doing' && params[:search] == ''
+    #   @tasks = current_user.tasks.where(status: 'doing').page(params[:page]).per(5)
+    # when params[:status] == 'done' && params[:search] == ''
+    #   @tasks = current_user.tasks.where(status: 'done').page(params[:page]).per(5)
+    # when params[:status] == 'achive' && params[:search] == ''
+    #   @tasks = current_user.tasks.where(status: 'achive').page(params[:page]).per(5)
+    # else
+    #   @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
+    # end
   end
 
   def sort_column
