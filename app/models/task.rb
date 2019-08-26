@@ -11,7 +11,7 @@ class Task < ApplicationRecord
   validates :user_id, :title, :status, :started_at, :deadline_at, :emergency_level, presence: true
 
   # search logic
-  scope :search_title_or_description_with, -> (search_params) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%") }
+  scope :search_or_select_with, -> (search_params, select_status) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%").where(status: select_status) }
   # scope :search_tagged_with, -> (tag_name) { find_by!(name: tag_name).tasks }
 
   # sort task logic
