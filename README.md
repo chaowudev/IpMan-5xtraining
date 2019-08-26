@@ -11,6 +11,7 @@
 - `$ rails db:create`
 - `$ rails db:migrate`
 - `$ rails db:seed`
+- `$ rails server`
 
 ## Test Suit
 1. Install Google Chrome web-driver
@@ -31,6 +32,10 @@ IpMan-5xtraining is deployed on heroku and performed with Git.
 4. `$ heroku run rails db:migrate`
 5. Use `$ heroku pg:psql` to establish a psql session with remote database
 6. Conect IpMan-5xtraining: https://ip-man-5xtraining.herokuapp.com
+7. Use test account:
+  - Admin:
+    - Email: test@ipman.com
+    - Password: test123
 
 ## ER Diagram:
 ![IpMan ER-Model](https://github.com/chaochaowu/IpMan-5xtraining/raw/prototype/prototype/19.07.08_ipman_ERD.jpg)

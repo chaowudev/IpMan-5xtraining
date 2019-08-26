@@ -86,6 +86,9 @@
         update_button: "更新使用者"
       show:
         show_title: " <任務列表>"
+  errors:
+    error_404: "你的需求我沒辦法幫你..."
+    error_500: "Oops! 你要不要稍後再試試看？"
 
   controller:
     notice:
