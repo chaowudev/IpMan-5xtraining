@@ -2,13 +2,10 @@ class TasksController < ApplicationController
   before_action :request_login
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
-  # before_action :search, only: :index
-  # before_action :select_status_with, only: :index
   before_action :search_or_select_with, only: :index
   before_action :sort_with_type, only: :index
 
   def index
-    # 在這判斷什麼時候要用到 search mehtod，什麼時候用到 select_status_with method
   end
 
   def new
@@ -61,8 +58,8 @@ class TasksController < ApplicationController
     elsif params[:search].blank? && status.in?(Task.statuses.keys)
       status = params[:status]&.to_sym
       @tasks = current_user.tasks.try(status).page(params[:page]).per(5)
-    # elsif params[:tag]
-    #   @tasks = current_user.tasks.search_tagged_with(params[:tag])
+    # elsif params[:tag] != nil
+    #   @tasks = current_user.tasks.tagged_with(params[:tag]).page(params[:page]).per(5)
     else
       @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
     end

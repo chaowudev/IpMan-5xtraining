@@ -12,15 +12,15 @@ class Task < ApplicationRecord
 
   # search logic
   scope :search_or_select_with, -> (search_params, select_status) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%").where(status: select_status) }
-  # scope :search_tagged_with, -> (name) { find_by_name!(name).tasks }
 
   # sort task logic
   scope :sort_by_date, -> (created_date_or_deadline_date) { order(created_date_or_deadline_date) }
   scope :sort_priority_by, -> (order = 'asc') { order(emergency_level: order) }
 
-  # def starte_time_later_than_deadline
-  #   errors.add(:deadline_at, I18n.t('activerecord.errors.messages.incorrect_deadline')) if deadline_at < started_at
-  # end
+  # tag feature
+  def self.tagged_with(name)
+    Tag.find_by!(name: name).tasks
+  end
 
   def tag_list
     tags.map(&:name).join(', ')
@@ -31,4 +31,8 @@ class Task < ApplicationRecord
       Tag.where(name: item.strip).first_or_create!
     end
   end
+
+  # def starte_time_later_than_deadline
+  #   errors.add(:deadline_at, I18n.t('activerecord.errors.messages.incorrect_deadline')) if deadline_at < started_at
+  # end
 end
