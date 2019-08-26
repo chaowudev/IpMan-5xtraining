@@ -12,7 +12,7 @@ class Task < ApplicationRecord
 
   # search logic
   scope :search_or_select_with, -> (search_params, select_status) { where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{search_params}%", "%#{search_params}%").where(status: select_status) }
-  # scope :search_tagged_with, -> (tag_name) { find_by!(name: tag_name).tasks }
+  # scope :search_tagged_with, -> (name) { find_by_name!(name).tasks }
 
   # sort task logic
   scope :sort_by_date, -> (created_date_or_deadline_date) { order(created_date_or_deadline_date) }

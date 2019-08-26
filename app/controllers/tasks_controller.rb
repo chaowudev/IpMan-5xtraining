@@ -55,34 +55,18 @@ class TasksController < ApplicationController
 
   def search_or_select_with
     if params[:search] && params[:status]
-      search_params = params[:search].downcase
+      search_title_or_description = params[:search].downcase
       select_status = params[:status]
-      @tasks = current_user.tasks.search_or_select_with(search_params, select_status).page(params[:page]).per(5)
+      @tasks = current_user.tasks.search_or_select_with(search_title_or_description, select_status).page(params[:page]).per(5)
     elsif params[:search].blank? && status.in?(Task.statuses.keys)
       status = params[:status]&.to_sym
       @tasks = current_user.tasks.try(status).page(params[:page]).per(5)
+    # elsif params[:tag]
+    #   @tasks = current_user.tasks.search_tagged_with(params[:tag])
     else
       @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
     end
   end
-
-  # def search
-  #   if params[:search]
-  #     search_params = params[:search].downcase
-  #     @tasks = current_user.tasks.search_title_or_description_with(search_params).page(params[:page]).per(5)
-  #   else
-  #     @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
-  #   end
-  # end
-
-  # def select_status_with
-  #   status = params[:status]&.to_sym
-  #   if params[:search].blank? && status.in?(Task.statuses.keys)
-  #     @tasks = current_user.tasks.try(status).page(params[:page]).per(5)
-  #   else
-  #     @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
-  #   end
-  # end
 
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'

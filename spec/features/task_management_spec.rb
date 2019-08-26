@@ -126,7 +126,7 @@ RSpec.feature "TaskManagements", type: :feature do
     end
 
     describe 'Search task flow' do
-      let(:chinese_task) { create :task, user_id: user.id, title: '中文', description: '這是中文任務描述' }
+      let(:chinese_task) { create :task, user_id: user.id, title: '中文', description: '這是中文任務描述', status: 1 }
       let(:english_task) { create :task, user_id: user.id, title: 'English', description: 'THIS IS ENGLISH TASK' }
       before do
         chinese_task
@@ -134,8 +134,9 @@ RSpec.feature "TaskManagements", type: :feature do
         visit tasks_path
       end
       
-      scenario 'Can search by task title as Chinese' do  
+      scenario 'Can search by task title as Chinese and search as doing' do  
         fill_in 'search', with: '中文'
+        find("option[value='doing']", text: 'doing').select_option
         click_button 'Search'
 
         expect(page).to have_selector('.task-item', count: 1)
@@ -150,12 +151,12 @@ RSpec.feature "TaskManagements", type: :feature do
         expect(page).to have_content english_task.title
       end
 
-      scenario 'Can search by task description as Chinese' do  
+      scenario 'Can not search by task description as Chinese and status as to_do' do  
         fill_in 'search', with: '任務'
+        find("option[value='to_do']", text: 'to_do').select_option
         click_button 'Search'
 
-        expect(page).to have_selector('.task-item', count: 1)
-        expect(page).to have_content chinese_task.title
+        expect(page).to have_selector('.task-item', count: 0)
       end
 
       scenario 'Can search by task description as English and case insensitive' do  
