@@ -11,18 +11,12 @@
 <%= form_tag tasks_path, method: :get do %>
   <div class="input-group mb-3">
     <%= text_field_tag :search, params[:search], placeholder: t('.search_text'), class: 'form-control' %>
+    <%= select_tag :status, options_for_select([["to_do", "to_do"], ["doing", "doing"], ["done", "done"], ["achive", "achive"]], params[:status]) %>
     <div class="input-group-append">
       <%= submit_tag t('.search_button'), name: nil, class: 'btn btn-outline-secondary' %>
     </div>
   </div>
 <% end %>
-
-<div>
-  <%= form_tag tasks_path, method: :get do %>
-    <%= label_tag :status, 'Select Status' %>
-    <%= select_tag :status, options_for_select([["to_do", "to_do"], ["doing", "doing"], ["done", "done"], ["achive", "achive"]], params[:status]) %>
-  <% end %>
-</div>
 
 <table class="table table-hover">
   <thead class="bg-warning">
