@@ -2,8 +2,7 @@ class TasksController < ApplicationController
   before_action :request_login
   before_action :options_content, only: %i[new create edit update]
   before_action :find_task, only: %i[show edit update destroy]
-  before_action :search, only: :index
-  before_action :select_status_with, only: :index
+  before_action :search_or_select_with, only: :index
   before_action :sort_with_type, only: :index
 
   def index
@@ -18,7 +17,6 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path, notice: t('controller.notice.tasks.create_success')
     else
-      # 待處理：如果不是重新整理的話，直接點選連結到下一頁，notice 還會再頁面上...
       flash[:notice] = t('controller.notice.tasks.create_failure')
       render :new
     end
@@ -47,38 +45,36 @@ class TasksController < ApplicationController
   private
 
   def sort_with_type
-    return search if params[:direction].blank?
+    return search_or_select_with if params[:direction].blank?
     priority_sort_direction
   end
 
-  def search
-    if params[:search]
-      search_params = params[:search].downcase
-      @tasks = current_user.tasks.search_title_or_description_with(search_params).page(params[:page]).per(5)
-    else
-      @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
-    end
-  end
+  def search_or_select_with
+    search_title_or_description = (params[:search] || '').downcase
+    if params[:search].present? && params[:status].present?
+      @tasks = current_user.tasks.
+               search_with(search_title_or_description).
+               status_with(params[:status]).
+               page(params[:page]).per(5)
 
-  def select_status_with
-    status = params[:status]&.to_sym
-    if params[:search].blank? && status.in?(Task.statuses.keys)
-      @tasks = current_user.tasks.try(status).page(params[:page]).per(5)
+    elsif params[:search].present?
+      @tasks = current_user.tasks.
+               search_with(search_title_or_description).
+               page(params[:page]).per(5)
+
+    elsif params[:search].blank? && params[:status].present?
+      @tasks = current_user.tasks.
+               status_with(params[:status]).
+               page(params[:page]).per(5)
+
+    elsif params[:tag].present?
+      @tag = Tag.find_by(name: params[:tag])
+      return @tasks = Task.none.page(params[:page]).per(5) if @tag.blank?
+      @tasks = @tag.tasks.where(user_id: current_user.id).page(params[:page]).per(5)
+
     else
       @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
     end
-    # case
-    # when params[:status] == 'to_do' && params[:search] == ''
-    #   @tasks = current_user.tasks.where(status: 'to_do').page(params[:page]).per(5)
-    # when params[:status] == 'doing' && params[:search] == ''
-    #   @tasks = current_user.tasks.where(status: 'doing').page(params[:page]).per(5)
-    # when params[:status] == 'done' && params[:search] == ''
-    #   @tasks = current_user.tasks.where(status: 'done').page(params[:page]).per(5)
-    # when params[:status] == 'achive' && params[:search] == ''
-    #   @tasks = current_user.tasks.where(status: 'achive').page(params[:page]).per(5)
-    # else
-    #   @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
-    # end
   end
 
   def sort_column
