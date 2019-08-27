@@ -17,7 +17,6 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path, notice: t('controller.notice.tasks.create_success')
     else
-      # 待處理：如果不是重新整理的話，直接點選連結到下一頁，notice 還會再頁面上...
       flash[:notice] = t('controller.notice.tasks.create_failure')
       render :new
     end
@@ -51,15 +50,28 @@ class TasksController < ApplicationController
   end
 
   def search_or_select_with
-    if params[:search] && params[:status]
-      search_title_or_description = params[:search].downcase
-      select_status = params[:status]
-      @tasks = current_user.tasks.search_or_select_with(search_title_or_description, select_status).page(params[:page]).per(5)
-    elsif params[:search].blank? && status.in?(Task.statuses.keys)
-      status = params[:status]&.to_sym
-      @tasks = current_user.tasks.try(status).page(params[:page]).per(5)
-    # elsif params[:tag] != nil
-    #   @tasks = current_user.tasks.tagged_with(params[:tag]).page(params[:page]).per(5)
+    search_title_or_description = (params[:search] || '').downcase
+    if params[:search].present? && params[:status].present?
+      @tasks = current_user.tasks.
+               search_with(search_title_or_description).
+               status_with(params[:status]).
+               page(params[:page]).per(5)
+
+    elsif params[:search].present?
+      @tasks = current_user.tasks.
+               search_with(search_title_or_description).
+               page(params[:page]).per(5)
+
+    elsif params[:search].blank? && params[:status].present?
+      @tasks = current_user.tasks.
+               status_with(params[:status]).
+               page(params[:page]).per(5)
+
+    elsif params[:tag].present?
+      @tag = Tag.find_by(name: params[:tag])
+      return @tasks = Task.none.page(params[:page]).per(5) if @tag.blank?
+      @tasks = @tag.tasks.where(user_id: current_user.id).page(params[:page]).per(5)
+
     else
       @tasks = current_user.tasks.sort_by_date(sort_column).page(params[:page]).per(5)
     end
