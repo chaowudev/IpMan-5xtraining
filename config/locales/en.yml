@@ -42,8 +42,10 @@ en:
       sort_by_created_date: "Created Date"
       sort_by_deadline_date: "Deadline Date"
       sort_by_priority_as_asc_or_desc: "Sort by Priority"
-      search_text: "Enter search text"
+      search_text: "Type text to search title or description"
       search_button: "Search"
+      search_tag_text: "Type text to search tag"
+      search_tag_button: "Search Tag"
       action: "Actions"
     new:
       new_task: "New Task"

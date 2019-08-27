@@ -42,8 +42,10 @@
       sort_by_created_date: "依建立日期排序"
       sort_by_deadline_date: "依結束日期排序"
       sort_by_priority_as_asc_or_desc: "依緊急程度排序"
-      search_text: "輸入文字搜尋"
+      search_text: "輸入文字搜尋任務標題、任務描述"
       search_button: "搜尋"
+      search_tag_text: "輸入文字搜尋標籤"
+      search_tag_button: "搜尋標籤"
       action: "處理"
     new:
       new_task: "新增任務"
