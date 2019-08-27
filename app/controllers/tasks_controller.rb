@@ -77,6 +77,22 @@ class TasksController < ApplicationController
     end
   end
 
+  # # Refactor search_or_select_with method
+  # # broken feature spec: 'Sort task flow Has correct order by deadline_at'
+  # def search_or_select_with
+  #   @tag = params[:tag].present? ? Tag.find_by(name: params[:tag]) : nil
+  #   @tasks = Task.none.page
+  #   return if params[:tag].present? && @tag.blank?
+
+  #   @tasks = get_tasks_with(@tag)
+  # end
+
+  # def get_tasks_with(tag = nil)
+  #   search_title_or_description = (params[:search] || '').downcase
+  #   sql = tag.present? ? tag.tasks.where(user_id: current_user.id) : current_user.tasks
+  #   sql.search_with(search_title_or_description).status_with(params[:status]).page(params[:page]).per(5)
+  # end
+
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
   end
