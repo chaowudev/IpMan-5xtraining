@@ -36,7 +36,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
 
 # Pagination in application
-gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'kaminari', '~> 1.2'
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 
 # To use ActiveModel has_secure_password
